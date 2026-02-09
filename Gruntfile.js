@@ -70,7 +70,7 @@ module.exports = function (grunt) {
 			compress: {
 				main: {
 					options: {
-						archive: "release/<%= pkg.name %>.zip",
+						archive: "release/debug-monitor.zip",
 					},
 					files: [
 						{
@@ -128,7 +128,7 @@ module.exports = function (grunt) {
 								"!deploy.sh",
 								"!test-deploy.sh"
 							],
-							dest: "debug-master/"
+							dest: "debug-monitor/"
 					},
 					],
 				},
@@ -144,7 +144,7 @@ module.exports = function (grunt) {
 					command: "cross-env NODE_ENV=production webpack"
 				},
 				makepot: {
-					command: "composer exec wp -- i18n make-pot . languages/debug-master.pot --domain=debug-master"
+					command: "composer exec wp -- i18n make-pot . languages/debug-monitor.pot --domain=debug-monitor"
 				},
 				phpcs: {
 					command: "npm run phpcs"

@@ -62,7 +62,7 @@ class SettingsController extends BaseController {
 				return $this->response(
 					array(
 						'success' => false,
-						'message' => __( 'Log file path not configured.', 'debug-master' ),
+						'message' => __( 'Log file path not configured.', 'debug-monitor' ),
 					),
 					400
 				);
@@ -81,7 +81,7 @@ class SettingsController extends BaseController {
 				return $this->response(
 					array(
 						'success' => false,
-						'message' => __( 'Failed to enable debug logging.', 'debug-master' ),
+						'message' => __( 'Failed to enable debug logging.', 'debug-monitor' ),
 					),
 					500
 				);
@@ -98,8 +98,8 @@ class SettingsController extends BaseController {
 				'success' => true,
 				'status'  => $new_status,
 				'message' => 'enabled' === $new_status
-					? __( 'Debug logging enabled.', 'debug-master' )
-					: __( 'Debug logging disabled.', 'debug-master' ),
+					? __( 'Debug logging enabled.', 'debug-monitor' )
+					: __( 'Debug logging disabled.', 'debug-monitor' ),
 			),
 			200
 		);
@@ -148,7 +148,7 @@ class SettingsController extends BaseController {
 		return $this->response(
 			array(
 				'success' => true,
-				'message' => __( 'Settings updated successfully.', 'debug-master' ),
+				'message' => __( 'Settings updated successfully.', 'debug-monitor' ),
 			),
 			200
 		);

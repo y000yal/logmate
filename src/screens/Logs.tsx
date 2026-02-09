@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import api from '../axios/api';
 import { LogsTable } from '../components/LogsTable';
@@ -18,12 +18,17 @@ export const LogsScreen: React.FC = () => {
 		refetchOnWindowFocus: true,
 	} );
 
+	// Memoize logStatusEnabled to check if logging is enabled.
+	const logStatusEnabled = useMemo( () => {
+		return settingsData?.data?.log_status === 'enabled';
+	}, [ settingsData?.data?.log_status ] );
+
 	// Memoize autorefreshEnabled to ensure it updates when settingsData changes.
 	const autorefreshEnabled = useMemo( () => {
 		return settingsData?.data?.autorefresh === 'enabled';
 	}, [ settingsData?.data?.autorefresh ] );
 	
-	const { data, isLoading, error, refetch, isFetching } = useQuery< LogsResponse >( {
+	const { data, isLoading, error, refetch: refetchLogs, isFetching } = useQuery< LogsResponse >( {
 		queryKey: [ 'logs', logType ],
 		queryFn: async () => {
 			const response = await api.get( '/logs', {
@@ -31,13 +36,27 @@ export const LogsScreen: React.FC = () => {
 			} );
 			return response.data;
 		},
+		enabled: logStatusEnabled === true, // Only fetch logs when logging is enabled.
 		refetchInterval: false, // Disable automatic refetch, we'll handle it manually.
+		retry: logStatusEnabled === true ? 1 : false, // Only retry if logging is enabled.
 	} );
+
+	// Wrapper function to ensure refetch only happens when logging is enabled.
+	const refetch = useCallback( () => {
+		if ( logStatusEnabled === true ) {
+			refetchLogs();
+		}
+	}, [ logStatusEnabled, refetchLogs ] );
 
 	// Auto-refresh logs every 10 seconds if enabled.
 	useEffect( () => {
 		// Early return if settings not loaded yet.
 		if ( settingsData === undefined ) {
+			return;
+		}
+
+		// Don't set up auto-refresh if logging is disabled.
+		if ( ! logStatusEnabled ) {
 			return;
 		}
 
@@ -57,7 +76,7 @@ export const LogsScreen: React.FC = () => {
 			}
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ autorefreshEnabled ] ); // Only depend on autorefreshEnabled, refetch is stable from React Query
+	}, [ autorefreshEnabled, logStatusEnabled, refetch ] ); // Depend on autorefreshEnabled, logStatusEnabled, and refetch
 
 	return (
 		<div className="debug-master-screen">

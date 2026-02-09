@@ -51,6 +51,7 @@ class DebugLogController extends BaseController {
 		$js_count = 0;
 
 		// Get PHP logs.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ( 'all' === $log_type || 'php' === $log_type || empty( $log_type ) ) && ! empty( $php_log_file_path ) && file_exists( $php_log_file_path ) ) {
 			$php_entries = $this->log_service->get_processed_entries( $php_log_file_path );
 			$php_count = count( $php_entries );
@@ -64,6 +65,7 @@ class DebugLogController extends BaseController {
 		}
 
 		// Get JS logs.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ( 'all' === $log_type || 'js' === $log_type || empty( $log_type ) ) && ! empty( $js_log_file_path ) && file_exists( $js_log_file_path ) ) {
 			$js_entries = $this->log_service->get_processed_entries( $js_log_file_path );
 			$js_count = count( $js_entries );
@@ -121,7 +123,7 @@ class DebugLogController extends BaseController {
 				$cleared_php = $this->log_service->clear_log_file( $php_log_file_path );
 				if ( $cleared_php ) {
 					$cleared = true;
-					$messages[] = __( 'PHP log file cleared successfully.', 'debug-master' );
+					$messages[] = __( 'PHP log file cleared successfully.', 'debug-monitor' );
 				}
 			}
 		}
@@ -133,7 +135,7 @@ class DebugLogController extends BaseController {
 				$cleared_js = $this->log_service->clear_log_file( $js_log_file_path );
 				if ( $cleared_js ) {
 					$cleared = true;
-					$messages[] = __( 'JavaScript log file cleared successfully.', 'debug-master' );
+					$messages[] = __( 'JavaScript log file cleared successfully.', 'debug-monitor' );
 				}
 			}
 		}
@@ -151,7 +153,7 @@ class DebugLogController extends BaseController {
 		return $this->response(
 			array(
 				'success' => false,
-				'message' => __( 'Failed to clear log file(s).', 'debug-master' ),
+				'message' => __( 'Failed to clear log file(s).', 'debug-monitor' ),
 			),
 			500
 		);
@@ -170,7 +172,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'JavaScript error logging is disabled.', 'debug-master' ),
+					'message' => __( 'JavaScript error logging is disabled.', 'debug-monitor' ),
 				),
 				403
 			);
@@ -182,7 +184,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Invalid nonce.', 'debug-master' ),
+					'message' => __( 'Invalid nonce.', 'debug-monitor' ),
 				),
 				403
 			);
@@ -195,7 +197,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Missing required fields.', 'debug-master' ),
+					'message' => __( 'Missing required fields.', 'debug-monitor' ),
 				),
 				400
 			);
@@ -216,7 +218,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'JavaScript log file path not configured.', 'debug-master' ),
+					'message' => __( 'JavaScript log file path not configured.', 'debug-monitor' ),
 				),
 				400
 			);
@@ -237,13 +239,22 @@ class DebugLogController extends BaseController {
 		);
 
 		// Write directly to JS log file.
-		$written = file_put_contents( $js_log_file_path, $error_message . PHP_EOL, FILE_APPEND );
+		$filesystem = debugm_get_filesystem();
+		if ( $filesystem ) {
+			// WP_Filesystem doesn't support FILE_APPEND, so read existing content first.
+			$existing_content = $filesystem->get_contents( $js_log_file_path );
+			$new_content = ( $existing_content ? $existing_content . PHP_EOL : '' ) . $error_message . PHP_EOL;
+			$written = $filesystem->put_contents( $js_log_file_path, $new_content, FS_CHMOD_FILE );
+		} else {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+			$written = file_put_contents( $js_log_file_path, $error_message . PHP_EOL, FILE_APPEND );
+		}
 
 		if ( false === $written ) {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Failed to write to JavaScript log file.', 'debug-master' ),
+					'message' => __( 'Failed to write to JavaScript log file.', 'debug-monitor' ),
 				),
 				500
 			);
@@ -252,7 +263,7 @@ class DebugLogController extends BaseController {
 		return $this->response(
 			array(
 				'success' => true,
-				'message' => __( 'JavaScript error logged successfully.', 'debug-master' ),
+				'message' => __( 'JavaScript error logged successfully.', 'debug-monitor' ),
 			),
 			200
 		);
@@ -285,6 +296,7 @@ class DebugLogController extends BaseController {
 		$log_type_text = '';
 
 		// Export PHP logs.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ( 'all' === $log_type || 'php' === $log_type ) && ! empty( $php_log_file_path ) && file_exists( $php_log_file_path ) ) {
 			$php_content = $this->get_export_content( $php_log_file_path, $export_type, $start_date, $end_date );
 			if ( ! empty( $php_content ) ) {
@@ -294,6 +306,7 @@ class DebugLogController extends BaseController {
 		}
 
 		// Export JS logs.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ( 'all' === $log_type || 'js' === $log_type ) && ! empty( $js_log_file_path ) && file_exists( $js_log_file_path ) ) {
 			$js_content = $this->get_export_content( $js_log_file_path, $export_type, $start_date, $end_date );
 			if ( ! empty( $js_content ) ) {
@@ -305,7 +318,7 @@ class DebugLogController extends BaseController {
 		if ( empty( $export_content ) ) {
 			return new \WP_Error(
 				'no_logs',
-				__( 'No logs found to export.', 'debug-master' ),
+				__( 'No logs found to export.', 'debug-monitor' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -341,17 +354,28 @@ class DebugLogController extends BaseController {
 	 * @return string
 	 */
 	private function get_export_content( string $log_file_path, string $export_type, ?string $start_date = null, ?string $end_date = null ): string {
+		$filesystem = debugm_get_filesystem();
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_readable( $log_file_path ) ) {
 			return '';
 		}
 
 		if ( 'entire-file' === $export_type ) {
+			if ( $filesystem ) {
+				return $filesystem->get_contents( $log_file_path );
+			}
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 			return file_get_contents( $log_file_path );
 		}
 
 		// Date range export.
 		if ( 'date-range' === $export_type && ! empty( $start_date ) && ! empty( $end_date ) && null !== $start_date && null !== $end_date ) {
-			$content = file_get_contents( $log_file_path );
+			if ( $filesystem ) {
+				$content = $filesystem->get_contents( $log_file_path );
+			} else {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
+				$content = file_get_contents( $log_file_path );
+			}
 			$lines = explode( "\n", $content );
 			$filtered_lines = array();
 

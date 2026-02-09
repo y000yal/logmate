@@ -51,8 +51,8 @@ class Settings {
 	 */
 	public function register_menu(): void {
 		add_menu_page(
-			__( 'Debug Master', 'debug-master' ),
-			__( 'Debug Master', 'debug-master' ),
+			__( 'Debug Monitor', 'debug-monitor' ),
+			__( 'Debug Monitor', 'debug-monitor' ),
 			'manage_options',
 			'debug-master',
 			array( $this, 'render_page' ),
@@ -74,8 +74,15 @@ class Settings {
 				update_option( 'debugm_js_log_file_path', $js_log_file_path, false );
 
 				// Create the file if it doesn't exist.
+				$filesystem = debugm_get_filesystem();
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_file
 				if ( ! is_file( $js_log_file_path ) ) {
-					file_put_contents( $js_log_file_path, '' );
+					if ( $filesystem ) {
+						$filesystem->put_contents( $js_log_file_path, '', FS_CHMOD_FILE );
+					} else {
+						// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+						file_put_contents( $js_log_file_path, '' );
+					}
 				}
 			}
 		}
@@ -168,8 +175,15 @@ class Settings {
 				update_option( 'debugm_js_log_file_path', $js_log_file_path, false );
 
 				// Create the file if it doesn't exist.
+				$filesystem = debugm_get_filesystem();
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_file
 				if ( ! is_file( $js_log_file_path ) ) {
-					file_put_contents( $js_log_file_path, '' );
+					if ( $filesystem ) {
+						$filesystem->put_contents( $js_log_file_path, '', FS_CHMOD_FILE );
+					} else {
+						// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+						file_put_contents( $js_log_file_path, '' );
+					}
 				}
 			}
 		}
@@ -269,11 +283,17 @@ class Settings {
 	 */
 	private static function create_log_file(): void {
 		$uploads_path = DEBUGM_UPLOAD_PATH;
+		$filesystem = debugm_get_filesystem();
 
 		if ( ! is_dir( $uploads_path ) ) {
 			wp_mkdir_p( $uploads_path );
 			// Create empty index to prevent directory browsing.
-			file_put_contents( $uploads_path . '/index.php', '<?php // Nothing to show here' );
+			if ( $filesystem ) {
+				$filesystem->put_contents( $uploads_path . '/index.php', '<?php // Nothing to show here', FS_CHMOD_FILE );
+			} else {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+				file_put_contents( $uploads_path . '/index.php', '<?php // Nothing to show here' );
+			}
 		}
 
 		$plain_domain = str_replace( array( '.', '-' ), '', sanitize_text_field( wp_unslash( $_SERVER['SERVER_NAME'] ?? 'localhost' ) ) );
@@ -286,11 +306,23 @@ class Settings {
 		update_option( 'debugm_js_log_file_path', $js_log_file_path, false );
 
 		// Create empty log files if they don't exist.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_file
 		if ( ! is_file( $log_file_path ) ) {
-			file_put_contents( $log_file_path, '' );
+			if ( $filesystem ) {
+				$filesystem->put_contents( $log_file_path, '', FS_CHMOD_FILE );
+			} else {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+				file_put_contents( $log_file_path, '' );
+			}
 		}
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_file
 		if ( ! is_file( $js_log_file_path ) ) {
-			file_put_contents( $js_log_file_path, '' );
+			if ( $filesystem ) {
+				$filesystem->put_contents( $js_log_file_path, '', FS_CHMOD_FILE );
+			} else {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+				file_put_contents( $js_log_file_path, '' );
+			}
 		}
 	}
 

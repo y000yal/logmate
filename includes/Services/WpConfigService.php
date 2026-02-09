@@ -44,6 +44,7 @@ class WpConfigService {
 	private function locate_wp_config(): string {
 		$config_path = ABSPATH . 'wp-config.php';
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $config_path ) ) {
 			$config_path = dirname( ABSPATH ) . '/wp-config.php';
 		}
@@ -57,10 +58,13 @@ class WpConfigService {
 	 * @return bool
 	 */
 	public function store_original_state(): bool {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $this->wp_config_path ) ) {
 			return false;
 		}
 
+		// wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 		$this->original_content = file_get_contents( $this->wp_config_path );
 		update_option( 'debugm_wp_config_backup', $this->original_content, false );
 
@@ -73,6 +77,7 @@ class WpConfigService {
 	 * @return bool
 	 */
 	public function restore_original_state(): bool {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $this->wp_config_path ) ) {
 			return false;
 		}
@@ -84,7 +89,8 @@ class WpConfigService {
 			return $this->remove_debug_constants();
 		}
 
-		// Restore from backup.
+		// Restore from backup. wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		$result = file_put_contents( $this->wp_config_path, $backup );
 
 		if ( false !== $result ) {
@@ -101,10 +107,13 @@ class WpConfigService {
 	 * @return bool
 	 */
 	private function remove_debug_constants(): bool {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $this->wp_config_path ) ) {
 			return false;
 		}
 
+		// wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 		$content = file_get_contents( $this->wp_config_path );
 
 		// Remove our debug constants.
@@ -129,10 +138,13 @@ class WpConfigService {
 	 * @return bool
 	 */
 	public function update_constant( string $constant_name, $value ): bool {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $this->wp_config_path ) ) {
 			return false;
 		}
 
+		// wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 		$content = file_get_contents( $this->wp_config_path );
 
 		// Format the value - handle strings, booleans, and ensure absolute paths.
@@ -200,6 +212,8 @@ class WpConfigService {
 			}
 		}
 
+		// wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		return false !== file_put_contents( $this->wp_config_path, $content );
 	}
 
@@ -251,6 +265,8 @@ class WpConfigService {
 
 		// Remove WP_DEBUG if it was set to true by us.
 		// Check if it exists and is true before removing.
+		// wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 		$content = file_get_contents( $this->wp_config_path );
 		if ( preg_match( "/define\s*\(\s*['\"]WP_DEBUG['\"]\s*,\s*true\s*\)/i", $content ) ) {
 			$results[] = $this->update_constant( 'WP_DEBUG', false );
@@ -277,10 +293,13 @@ class WpConfigService {
 	 * @return bool
 	 */
 	private function remove_constant( string $constant_name ): bool {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $this->wp_config_path ) ) {
 			return false;
 		}
 
+		// wp-config.php may be outside WordPress directory, use direct access.
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 		$content = file_get_contents( $this->wp_config_path );
 		$escaped_name = preg_quote( $constant_name, '/' );
 
@@ -309,6 +328,8 @@ class WpConfigService {
 		$content = preg_replace( "/\n\s*\n\s*\n+/", "\n\n", $content );
 
 		if ( $changed ) {
+			// wp-config.php may be outside WordPress directory, use direct access.
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 			return false !== file_put_contents( $this->wp_config_path, $content );
 		}
 

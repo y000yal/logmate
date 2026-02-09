@@ -31,7 +31,7 @@ class PermissionMiddleware {
 		) {
 			return new WP_Error(
 				'rest_forbidden',
-				__( 'You are not allowed to perform this action.', 'debug-master' ),
+				__( 'You are not allowed to perform this action.', 'debug-monitor' ),
 				array( 'status' => 403 )
 			);
 		}

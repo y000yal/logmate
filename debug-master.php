@@ -1,13 +1,13 @@
 <?php // phpcs:ignore
 
 /**
- * Plugin Name: Debug Master
- * Plugin URI: https://brutefort.com/products/debug-master
- * Description: Modern debug log management for WordPress with React interface, log purging, and advanced filtering.
+ * Plugin Name: LogMate
+ * Plugin URI: https://brutefort.com/#/products/debug-master
+ * Description: Modern log management and export for WordPress with purging, filtering, and export. by BruteFort
  * Version: 1.0.0
  * Author: Y0000el
  * Author URI: https://yoyallimbu.com.np
- * Text Domain: debug-master
+ * Text Domain: debug-monitor
  * Domain Path: /languages/
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -165,24 +165,8 @@ final class DebugMaster {
 		// Before init action.
 		do_action( 'debugm_before_init' );
 
-		// Set up localisation.
-		$this->load_plugin_textdomain();
-
 		// Init action.
 		do_action( 'debugm_init' );
-	}
-
-	/**
-	 * Load plugin textdomain.
-	 *
-	 * @return void
-	 */
-	public function load_plugin_textdomain(): void {
-		$domain = 'debug-master';
-		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-
-		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**

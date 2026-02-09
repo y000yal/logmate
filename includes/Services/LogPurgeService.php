@@ -37,20 +37,27 @@ class LogPurgeService {
 	 * @return array Result with deleted count.
 	 */
 	public function purge_before_date( string $log_file_path, string $before_date ): array {
+		$filesystem = debugm_get_filesystem();
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_readable( $log_file_path ) ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Log file not found or not readable.', 'debug-master' ),
+				'message' => __( 'Log file not found or not readable.', 'debug-monitor' ),
 			);
 		}
 
-		$content     = file_get_contents( $log_file_path );
+		if ( $filesystem ) {
+			$content = $filesystem->get_contents( $log_file_path );
+		} else {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
+			$content = file_get_contents( $log_file_path );
+		}
 		$target_time = strtotime( $before_date );
 
 		if ( false === $target_time ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Invalid date format.', 'debug-master' ),
+				'message' => __( 'Invalid date format.', 'debug-monitor' ),
 			);
 		}
 
@@ -73,7 +80,12 @@ class LogPurgeService {
 
 		// Write back kept entries.
 		$new_content = implode( "\n", $kept_entries );
-		$result      = file_put_contents( $log_file_path, $new_content );
+		if ( $filesystem ) {
+			$result = $filesystem->put_contents( $log_file_path, $new_content, FS_CHMOD_FILE );
+		} else {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+			$result = file_put_contents( $log_file_path, $new_content );
+		}
 
 		if ( false !== $result ) {
 			$deleted_count = count( $entries ) - count( $kept_entries );
@@ -81,7 +93,7 @@ class LogPurgeService {
 				'success'      => true,
 				'message'      => sprintf(
 					// translators: %d is the number of entries deleted.
-					__( 'Deleted %d log entries.', 'debug-master' ),
+					__( 'Deleted %d log entries.', 'debug-monitor' ),
 					$deleted_count
 				),
 				'deleted_count' => $deleted_count,
@@ -90,7 +102,7 @@ class LogPurgeService {
 
 		return array(
 			'success' => false,
-			'message' => __( 'Failed to write log file.', 'debug-master' ),
+			'message' => __( 'Failed to write log file.', 'debug-monitor' ),
 		);
 	}
 
@@ -107,7 +119,7 @@ class LogPurgeService {
 		if ( ! in_array( $period, $valid_periods, true ) ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Invalid period type.', 'debug-master' ),
+				'message' => __( 'Invalid period type.', 'debug-monitor' ),
 			);
 		}
 

@@ -23,6 +23,8 @@ class DebugLogService {
 	 * @return array
 	 */
 	public function get_processed_entries( string $log_file_path, int $limit = 100000 ): array {
+		$filesystem = debugm_get_filesystem();
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_readable( $log_file_path ) ) {
 			return array();
 		}
@@ -51,18 +53,25 @@ class DebugLogService {
 	 * @return string
 	 */
 	private function read_log_file( string $file_path ): string {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_filesize
 		$file_size = filesize( $file_path );
+		$filesystem = debugm_get_filesystem();
 
 		// For very large files, read only the last portion.
+		// Note: WP_Filesystem doesn't support fseek/fread operations needed for large file reading.
 		if ( $file_size > 10 * 1024 * 1024 ) { // 10MB
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 			$handle = fopen( $file_path, 'r' );
 			if ( false === $handle ) {
 				return '';
 			}
 
 			// Read last 5MB.
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fseek
 			fseek( $handle, -5 * 1024 * 1024, SEEK_END );
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
 			$content = fread( $handle, 5 * 1024 * 1024 );
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 			fclose( $handle );
 
 			// Remove partial first line.
@@ -74,6 +83,12 @@ class DebugLogService {
 			return $content;
 		}
 
+		// For smaller files, use WP_Filesystem if available.
+		if ( $filesystem ) {
+			return $filesystem->get_contents( $file_path );
+		}
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_get_contents
 		return file_get_contents( $file_path );
 	}
 
@@ -287,10 +302,17 @@ class DebugLogService {
 	 * @return bool
 	 */
 	public function clear_log_file( string $log_file_path ): bool {
+		$filesystem = debugm_get_filesystem();
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_writable( $log_file_path ) ) {
 			return false;
 		}
 
+		if ( $filesystem ) {
+			return $filesystem->put_contents( $log_file_path, '', FS_CHMOD_FILE );
+		}
+
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		return false !== file_put_contents( $log_file_path, '' );
 	}
 
@@ -301,10 +323,12 @@ class DebugLogService {
 	 * @return string
 	 */
 	public function get_log_file_size( string $log_file_path ): string {
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) ) {
 			return '0 B';
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_filesize
 		return size_format( filesize( $log_file_path ) );
 	}
 }

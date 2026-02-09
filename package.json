@@ -1,7 +1,7 @@
 {
   "name": "debug-master",
-  "title": "Debug Master",
-  "description": "Modern debug log management for WordPress with React interface.",
+  "title": "LogMate",
+  "description": "Modern log management and export for WordPress with purging, filtering, and export.",
   "author": "y0000el",
   "version": "1.0.0",
   "scripts": {

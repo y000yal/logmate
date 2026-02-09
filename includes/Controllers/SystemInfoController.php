@@ -93,12 +93,16 @@ class SystemInfoController extends BaseController {
 		$php_log_exists = false;
 		$js_log_exists = false;
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! empty( $php_log_file_path ) && file_exists( $php_log_file_path ) ) {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_filesize
 			$php_log_size = filesize( $php_log_file_path );
 			$php_log_exists = true;
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! empty( $js_log_file_path ) && file_exists( $js_log_file_path ) ) {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_filesize
 			$js_log_size = filesize( $js_log_file_path );
 			$js_log_exists = true;
 		}
