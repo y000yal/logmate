@@ -41,8 +41,8 @@ class SettingsRoutes extends AbstractRoutes {
 	public function register_routes(): void {
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base,
+			$this->namespace . '/' . $this->version,
+			$this->rest_base,
 			array(
 				array(
 					'methods'             => 'GET',
@@ -53,8 +53,8 @@ class SettingsRoutes extends AbstractRoutes {
 		);
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/toggle-logging',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/toggle-logging',
 			array(
 				array(
 					'methods'             => 'POST',
@@ -65,8 +65,8 @@ class SettingsRoutes extends AbstractRoutes {
 		);
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/update',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/update',
 			array(
 				array(
 					'methods'             => 'POST',

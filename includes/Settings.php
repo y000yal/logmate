@@ -37,7 +37,7 @@ class Settings {
 	private function get_icon_svg( $base64 = true ) {
 		$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">' .
 			'<text x="16" y="22" font-family="Arial, sans-serif" font-size="18" ' .
-			'font-weight="bold" fill="#82878c" text-anchor="middle">DM</text></svg>';
+			'font-weight="bold" fill="#82878c" text-anchor="middle">LM</text></svg>';
 
 		if ( $base64 ) {
 			return 'data:image/svg+xml;base64,' . base64_encode( $svg );
@@ -51,8 +51,8 @@ class Settings {
 	 */
 	public function register_menu(): void {
 		add_menu_page(
-			__( 'Debug Monitor', 'debug-monitor' ),
-			__( 'Debug Monitor', 'debug-monitor' ),
+			__( 'LogMate', 'debug-monitor' ),
+			__( 'LogMate', 'debug-monitor' ),
 			'manage_options',
 			'debug-master',
 			array( $this, 'render_page' ),

@@ -41,8 +41,8 @@ class DebugLogRoutes extends AbstractRoutes {
 	public function register_routes(): void {
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base,
+			$this->namespace . '/' . $this->version,
+			$this->rest_base,
 			array(
 				array(
 					'methods'             => 'GET',
@@ -53,8 +53,8 @@ class DebugLogRoutes extends AbstractRoutes {
 		);
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/clear',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/clear',
 			array(
 				array(
 					'methods'             => 'POST',
@@ -66,8 +66,8 @@ class DebugLogRoutes extends AbstractRoutes {
 
 		// JavaScript error logging endpoint (no authentication required for frontend).
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/js-error',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/js-error',
 			array(
 				array(
 					'methods'             => 'POST',
@@ -79,8 +79,8 @@ class DebugLogRoutes extends AbstractRoutes {
 
 		// Export logs endpoint.
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/export',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/export',
 			array(
 				array(
 					'methods'             => 'GET',

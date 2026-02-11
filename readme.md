@@ -18,7 +18,7 @@ x
 
 1. Upload the plugin files to the `/wp-content/plugins/debug-master` directory, or install it via the WordPress plugin screen.
 2. Activate through the 'Plugins' menu.
-3. Configure via **Debug Monitor** menu in WordPress admin.
+3. Configure via **LogMate** menu in WordPress admin.
 
 ## Development
 

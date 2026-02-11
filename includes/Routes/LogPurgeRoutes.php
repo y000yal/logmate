@@ -41,8 +41,8 @@ class LogPurgeRoutes extends AbstractRoutes {
 	public function register_routes(): void {
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/before-date',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/before-date',
 			array(
 				array(
 					'methods'             => 'POST',
@@ -53,8 +53,8 @@ class LogPurgeRoutes extends AbstractRoutes {
 		);
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base . '/keep-last',
+			$this->namespace . '/' . $this->version,
+			$this->rest_base . '/keep-last',
 			array(
 				array(
 					'methods'             => 'POST',

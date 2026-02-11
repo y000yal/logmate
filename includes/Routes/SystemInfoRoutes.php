@@ -41,8 +41,8 @@ class SystemInfoRoutes extends AbstractRoutes {
 	public function register_routes(): void {
 
 		register_rest_route(
-			$this->namespace . '/' . $this->version . '/',
-			'/' . $this->rest_base,
+			$this->namespace . '/' . $this->version,
+			$this->rest_base,
 			array(
 				array(
 					'methods'             => 'GET',
