@@ -1,13 +1,13 @@
 <?php
 /**
- * Settings Routes for Debug Master plugin.
+ * Settings Routes for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Routes;
+namespace LogMate\Routes;
 
-use DebugMaster\Controllers\SettingsController;
+use LogMate\Controllers\SettingsController;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -15,7 +15,7 @@ use WP_REST_Response;
 /**
  * Settings Routes class for managing settings REST endpoints.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class SettingsRoutes extends AbstractRoutes {
 

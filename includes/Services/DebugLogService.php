@@ -3,15 +3,15 @@
  * Debug Log Service for processing log files.
  *
  * @since 1.0.0
- * @package DebugMaster\Services
+ * @package LogMate\Services
  */
 
-namespace DebugMaster\Services;
+namespace LogMate\Services;
 
 /**
  * DebugLogService class for processing and parsing log files.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class DebugLogService {
 
@@ -23,7 +23,7 @@ class DebugLogService {
 	 * @return array
 	 */
 	public function get_processed_entries( string $log_file_path, int $limit = 100000 ): array {
-		$filesystem = debugm_get_filesystem();
+		$filesystem = logmate_get_filesystem();
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_readable( $log_file_path ) ) {
 			return array();
@@ -55,7 +55,7 @@ class DebugLogService {
 	private function read_log_file( string $file_path ): string {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_filesize
 		$file_size = filesize( $file_path );
-		$filesystem = debugm_get_filesystem();
+		$filesystem = logmate_get_filesystem();
 
 		// For very large files, read only the last portion.
 		// Note: WP_Filesystem doesn't support fseek/fread operations needed for large file reading.
@@ -248,7 +248,7 @@ class DebugLogService {
 		}
 
 		// Check for plugin/theme names in message (common patterns).
-		if ( preg_match( '/\b(brutefort|debug-master|debug-log-manager|woocommerce|elementor|yoast)\b/i', $message, $matches ) ) {
+		if ( preg_match( '/\b(brutefort|logmate|debug-log-manager|woocommerce|elementor|yoast)\b/i', $message, $matches ) ) {
 			return 'Plugin: ' . ucfirst( $matches[1] );
 		}
 
@@ -302,7 +302,7 @@ class DebugLogService {
 	 * @return bool
 	 */
 	public function clear_log_file( string $log_file_path ): bool {
-		$filesystem = debugm_get_filesystem();
+		$filesystem = logmate_get_filesystem();
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_writable( $log_file_path ) ) {
 			return false;

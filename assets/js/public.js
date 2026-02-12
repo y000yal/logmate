@@ -1,35 +1,35 @@
 /**
- * Public JavaScript for Debug Master - Captures JavaScript errors.
+ * Public JavaScript for LogMate - Captures JavaScript errors.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 (function () {
 	'use strict';
 
-	// Wait for DebugMasterData to be available (WordPress localizes scripts).
+	// Wait for LogMateData to be available (WordPress localizes scripts).
 	function initErrorLogging() {
-		// Check if DebugMasterData is available and JS error logging is enabled.
-		if ( typeof DebugMasterData === 'undefined' ) {
-			console.log( '[Debug Master] DebugMasterData not available yet, retrying...' );
+		// Check if LogMateData is available and JS error logging is enabled.
+		if ( typeof LogMateData === 'undefined' ) {
+			console.log( '[LogMate] LogMateData not available yet, retrying...' );
 			setTimeout( initErrorLogging, 100 );
 			return;
 		}
 
-		if ( ! DebugMasterData.jsErrorLogging || DebugMasterData.jsErrorLogging.status !== 'enabled' ) {
-			console.log( '[Debug Master] JS error logging not enabled', DebugMasterData );
+		if ( ! LogMateData.jsErrorLogging || LogMateData.jsErrorLogging.status !== 'enabled' ) {
+			console.log( '[LogMate] JS error logging not enabled', LogMateData );
 			return;
 		}
 
-		console.log( '[Debug Master] JS error logging initialized', DebugMasterData.jsErrorLogging );
+		console.log( '[LogMate] JS error logging initialized', LogMateData.jsErrorLogging );
 
 		// Log javascript errors in the front end via XHR.
 		// Code source: https://plugins.svn.wordpress.org/javascript-error-reporting-client/tags/1.0.3/public/js/jerc.js.
 
 		window.onerror = function (msg, url, lineNo, columnNo, error) {
-			console.log( '[Debug Master] Error caught:', msg, url, lineNo, columnNo );
+			console.log( '[LogMate] Error caught:', msg, url, lineNo, columnNo );
 			var data = {
-				nonce: DebugMasterData.nonce,
+				nonce: LogMateData.nonce,
 				message: msg,
 				script: url,
 				lineNo: lineNo,
@@ -39,16 +39,16 @@
 			};
 
 			var xhr = new XMLHttpRequest();
-			xhr.open( "POST", DebugMasterData.jsErrorLogging.url );
+			xhr.open( "POST", LogMateData.jsErrorLogging.url );
 			xhr.setRequestHeader( 'Content-type', 'application/json' );
-			xhr.setRequestHeader( 'X-WP-Nonce', DebugMasterData.nonce );
+			xhr.setRequestHeader( 'X-WP-Nonce', LogMateData.nonce );
 
 			xhr.onload = function () {
-				console.log( '[Debug Master] Error logged successfully:', xhr.status, xhr.responseText );
+				console.log( '[LogMate] Error logged successfully:', xhr.status, xhr.responseText );
 			};
 
 			xhr.onerror = function () {
-				console.error( '[Debug Master] Failed to log error:', xhr.status, xhr.statusText );
+				console.error( '[LogMate] Failed to log error:', xhr.status, xhr.statusText );
 			};
 
 			xhr.send( JSON.stringify( data ) );
@@ -60,7 +60,7 @@
 			'unhandledrejection',
 			function (event) {
 				var data = {
-					nonce: DebugMasterData.nonce,
+					nonce: LogMateData.nonce,
 					message: event.reason ? (event.reason.message || event.reason.toString()) : 'Unhandled Promise Rejection',
 					script: window.location.href,
 					lineNo: 0,
@@ -70,15 +70,15 @@
 				};
 
 				var xhr = new XMLHttpRequest();
-				xhr.open( "POST", DebugMasterData.jsErrorLogging.url );
+				xhr.open( "POST", LogMateData.jsErrorLogging.url );
 				xhr.setRequestHeader( 'Content-type', 'application/json' );
-				xhr.setRequestHeader( 'X-WP-Nonce', DebugMasterData.nonce );
+				xhr.setRequestHeader( 'X-WP-Nonce', LogMateData.nonce );
 				xhr.onload = function () {
-					console.log( '[Debug Master] Promise rejection logged successfully:', xhr.status, xhr.responseText );
+					console.log( '[LogMate] Promise rejection logged successfully:', xhr.status, xhr.responseText );
 				};
 
 				xhr.onerror = function () {
-					console.error( '[Debug Master] Failed to log promise rejection:', xhr.status, xhr.statusText );
+					console.error( '[LogMate] Failed to log promise rejection:', xhr.status, xhr.statusText );
 				};
 
 				xhr.send( JSON.stringify( data ) );
@@ -86,13 +86,13 @@
 		);
 
 		// Expose a manual test function to window for debugging.
-		window.debugMasterTestError = function () {
-			console.log( '[Debug Master] Manual test error triggered' );
-			throw new Error( 'Debug Master Manual Test Error' );
+		window.logMateTestError = function () {
+			console.log( '[LogMate] Manual test error triggered' );
+			throw new Error( 'LogMate Manual Test Error' );
 		};
 
 		// Expose a manual test function to log an object.
-		window.debugMasterTestObject = function () {
+		window.logMateTestObject = function () {
 			var testObject = {
 				name: 'Manual Test Object',
 				timestamp: new Date().toISOString(),
@@ -100,7 +100,7 @@
 			};
 
 			var data = {
-				nonce: DebugMasterData.nonce,
+				nonce: LogMateData.nonce,
 				message: 'Manual Object Test: ' + JSON.stringify( testObject, null, 2 ),
 				script: window.location.href,
 				lineNo: 0,
@@ -110,19 +110,19 @@
 			};
 
 			var xhr = new XMLHttpRequest();
-			xhr.open( "POST", DebugMasterData.jsErrorLogging.url );
+			xhr.open( "POST", LogMateData.jsErrorLogging.url );
 			xhr.setRequestHeader( 'Content-type', 'application/json' );
-			xhr.setRequestHeader( 'X-WP-Nonce', DebugMasterData.nonce );
+			xhr.setRequestHeader( 'X-WP-Nonce', LogMateData.nonce );
 			xhr.onload = function () {
-				console.log( '[Debug Master] Manual object test logged successfully:', xhr.status, xhr.responseText );
+				console.log( '[LogMate] Manual object test logged successfully:', xhr.status, xhr.responseText );
 			};
 			xhr.onerror = function () {
-				console.error( '[Debug Master] Failed to log manual object test:', xhr.status, xhr.statusText );
+				console.error( '[LogMate] Failed to log manual object test:', xhr.status, xhr.statusText );
 			};
 			xhr.send( JSON.stringify( data ) );
 		};
 
-		console.log( '[Debug Master] Manual tests available: Run debugMasterTestError() or debugMasterTestObject() in console' );
+		console.log( '[LogMate] Manual tests available: Run debugMasterTestError() or debugMasterTestObject() in console' );
 	}
 
 	// Start initialization when DOM is ready or immediately if already ready.

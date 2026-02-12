@@ -3,10 +3,10 @@
  * Base Controller class.
  *
  * @since 1.0.0
- * @package DebugMaster\Controllers
+ * @package LogMate\Controllers
  */
 
-namespace DebugMaster\Controllers;
+namespace LogMate\Controllers;
 
 use WP_Error;
 use WP_HTTP_Response;
@@ -15,7 +15,7 @@ use WP_REST_Response;
 /**
  * Base Controller class for all controllers.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 abstract class Controller {
 

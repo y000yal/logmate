@@ -1,4 +1,4 @@
-/* Debug Master Admin Styles */
+/* LogMate Admin Styles */
 
 :root {
 	/* Primary Colors */
@@ -45,7 +45,7 @@
 	--dm-shadow-xl: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.debug-master-app {
+.logmate-app {
 	padding: 20px;
 	gap: 20px;
 	margin-left: -20px;
@@ -55,14 +55,14 @@
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-.debug-master-menu-container {
+.logmate-menu-container {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
 	z-index: 99999;
 }
 
-.debug-master-floating-menu-toggle {
+.logmate-floating-menu-toggle {
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -82,7 +82,7 @@
 	overflow: hidden;
 }
 
-.debug-master-floating-menu-toggle svg {
+.logmate-floating-menu-toggle svg {
 	color: var(--dm-text-white) !important;
 	fill: var(--dm-text-white) !important;
 	stroke: var(--dm-text-white) !important;
@@ -91,7 +91,7 @@
 	flex-shrink: 0;
 }
 
-.debug-master-floating-menu-toggle:hover {
+.logmate-floating-menu-toggle:hover {
 	transform: scale(1.1);
 	box-shadow: 0 6px 20px rgba(188, 188, 188, 0.5), 0 4px 12px rgba(0, 0, 0, 0.2);
 	background: var(--dm-primary-dark);
@@ -99,17 +99,17 @@
 	color: var(--dm-text-white) !important;
 }
 
-.debug-master-floating-menu-toggle:hover svg {
+.logmate-floating-menu-toggle:hover svg {
 	color: var(--dm-text-white) !important;
 	fill: var(--dm-text-white) !important;
 	stroke: var(--dm-text-white) !important;
 }
 
-.debug-master-floating-menu-toggle:active {
+.logmate-floating-menu-toggle:active {
 	transform: scale(0.95);
 }
 
-.debug-master-dropdown-menu {
+.logmate-dropdown-menu {
 	position: absolute;
 	bottom: calc(66px);
 	right: 0;
@@ -137,7 +137,7 @@
 	}
 }
 
-.debug-master-dropdown-item {
+.logmate-dropdown-item {
 	display: flex;
 	align-items: center;
 	gap: 12px;
@@ -154,34 +154,34 @@
 	width: 100%;
 }
 
-.debug-master-dropdown-item:hover {
+.logmate-dropdown-item:hover {
 	background: var(--dm-bg-hover);
 	color: var(--dm-text-primary);
 }
 
-.debug-master-dropdown-item.active {
+.logmate-dropdown-item.active {
 	background: var(--dm-primary);
 	color: var(--dm-text-white);
 }
 
-.debug-master-dropdown-item.active:hover {
+.logmate-dropdown-item.active:hover {
 	background: var(--dm-primary-dark);
 }
 
-.debug-master-dropdown-item svg {
+.logmate-dropdown-item svg {
 	flex-shrink: 0;
 }
 
-.debug-master-content {
+.logmate-content {
 	flex: 1;
 	overflow: visible;
 }
 
-.debug-master-screen {
+.logmate-screen {
 	padding: 20px;
 }
 
-.debug-master-meta-bar {
+.logmate-meta-bar {
 	display: flex;
 	gap: 20px;
 	color: var(--dm-text-light);
@@ -193,14 +193,14 @@
 	font-size: 13px;
 }
 
-.debug-master-table-container {
+.logmate-table-container {
 	background: var(--dm-bg-primary);
 	border-radius: 8px;
 	padding: 20px;
 	box-shadow: var(--dm-shadow-md);
 }
 
-.debug-master-table-toolbar {
+.logmate-table-toolbar {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -209,7 +209,7 @@
 	flex-wrap: wrap;
 }
 
-.debug-master-table-toolbar-left {
+.logmate-table-toolbar-left {
 	display: flex;
 	align-items: center;
 	gap: 15px;
@@ -217,7 +217,7 @@
 	min-width: 0;
 }
 
-.debug-master-search {
+.logmate-search {
 	padding: 8px 12px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
@@ -225,16 +225,16 @@
 	max-width: 400px;
 }
 
-.debug-master-export-btn {
+.logmate-export-btn {
 	white-space: nowrap;
 }
 
-.debug-master-table-actions {
+.logmate-table-actions {
 	display: flex;
 	gap: 10px;
 }
 
-.debug-master-btn {
+.logmate-btn {
 	padding: 10px 16px;
 	border: none;
 	border-radius: 8px;
@@ -250,7 +250,7 @@
 	overflow: hidden;
 }
 
-.debug-master-btn::before {
+.logmate-btn::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -262,30 +262,30 @@
 	opacity: 0;
 }
 
-.debug-master-btn:hover::before {
+.logmate-btn:hover::before {
 	left: 100%;
 	opacity: 1;
 }
 
-.debug-master-btn-primary {
+.logmate-btn-primary {
 	background: var(--dm-primary);
 	color: var(--dm-text-primary);
 	border: 1px solid var(--dm-border-dark);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.debug-master-btn-primary:hover {
+.logmate-btn-primary:hover {
 	background: var(--dm-primary-light);
 	border-color: var(--dm-primary-light);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.debug-master-btn-primary:active {
+.logmate-btn-primary:active {
 	transform: translateY(0);
 	box-shadow: 0 1px 2px rgba(188, 188, 188, 0.3);
 }
 
-.debug-master-btn-primary:disabled {
+.logmate-btn-primary:disabled {
 	background: var(--dm-border-dark);
 	cursor: not-allowed;
 	opacity: 0.6;
@@ -293,53 +293,53 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.debug-master-btn-secondary {
+.logmate-btn-secondary {
 	background: var(--dm-bg-hover);
 	color: var(--dm-text-primary);
 	border: 1px solid var(--dm-border);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.debug-master-btn-secondary:hover {
+.logmate-btn-secondary:hover {
 	background: var(--dm-border);
 	border-color: var(--dm-border);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.debug-master-btn-secondary:active {
+.logmate-btn-secondary:active {
 	transform: translateY(0);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.debug-master-btn-secondary:disabled {
+.logmate-btn-secondary:disabled {
 	opacity: 0.6;
 	cursor: not-allowed;
 	transform: none;
 	background: var(--dm-bg-hover);
 }
 
-.debug-master-btn-danger {
+.logmate-btn-danger {
 	background: var(--dm-danger);
 	color: var(--dm-text-white);
 	box-shadow: 0 1px 3px rgba(219, 46, 46, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.debug-master-btn-danger:hover {
+.logmate-btn-danger:hover {
 	background: var(--dm-danger-dark);
 	box-shadow: 0 3px 6px rgba(219, 46, 46, 0.3), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.debug-master-btn-danger:active {
+.logmate-btn-danger:active {
 	transform: translateY(0);
 	box-shadow: 0 1px 2px rgba(219, 46, 46, 0.3);
 }
 
-.debug-master-table {
+.logmate-table {
 	width: 100%;
 	border-collapse: collapse;
 }
 
-.debug-master-table th {
+.logmate-table th {
 	text-align: left;
 	padding: 12px;
 	background: var(--dm-bg-tertiary);
@@ -347,21 +347,21 @@
 	font-weight: 600;
 }
 
-.debug-master-table th.sortable {
+.logmate-table th.sortable {
 	cursor: pointer;
 	user-select: none;
 }
 
-.debug-master-table th.sortable:hover {
+.logmate-table th.sortable:hover {
 	background: #f0f0f0;
 }
 
-.debug-master-table td {
+.logmate-table td {
 	padding: 12px;
 	border-bottom: 1px solid var(--dm-border-light);
 }
 
-.debug-master-table tr:hover {
+.logmate-table tr:hover {
 	background: var(--dm-bg-tertiary);
 }
 
@@ -403,7 +403,7 @@
 	font-size: 13px;
 }
 
-.debug-master-pagination {
+.logmate-pagination {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -411,7 +411,7 @@
 	margin-top: 20px;
 }
 
-.debug-master-settings {
+.logmate-settings {
 	background: var(--dm-bg-primary);
 	border-radius: 8px;
 	padding: 30px;
@@ -419,28 +419,28 @@
 	overflow: visible;
 }
 
-.debug-master-settings-section {
+.logmate-settings-section {
 	margin-bottom: 40px;
 	padding-bottom: 30px;
 	border-bottom: 1px solid var(--dm-border-light);
 }
 
-.debug-master-settings-section:last-child {
+.logmate-settings-section:last-child {
 	border-bottom: none;
 }
 
-.debug-master-settings-section h2 {
+.logmate-settings-section h2 {
 	margin: 0 0 20px 0;
 	font-size: 20px;
 	color: var(--dm-text-primary);
 }
 
-.debug-master-setting-item {
+.logmate-setting-item {
 	margin-bottom: 20px;
 }
 
-.debug-master-setting-item > label,
-.debug-master-setting-label {
+.logmate-setting-item > label,
+.logmate-setting-label {
 	display: block;
 	margin-bottom: 8px;
 	font-weight: 500;
@@ -448,7 +448,7 @@
 	font-size: 13px;
 }
 
-.debug-master-setting-label-wrapper {
+.logmate-setting-label-wrapper {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -457,29 +457,29 @@
 	min-width: 200px;
 }
 
-.debug-master-setting-label-wrapper > label {
+.logmate-setting-label-wrapper > label {
 	margin-bottom: 0;
 }
 
-.debug-master-setting-header {
+.logmate-setting-header {
 	display: flex;
 	align-items: center;
 	gap: 12px;
 	width: 100%;
 }
 
-.debug-master-setting-header .status-info {
+.logmate-setting-header .status-info {
 	flex: 1;
 }
 
-.debug-master-setting-row {
+.logmate-setting-row {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	gap: 20px;
 }
 
-.debug-master-setting-item code {
+.logmate-setting-item code {
 	display: block;
 	background: var(--dm-bg-tertiary);
 	padding: 10px 14px;
@@ -494,7 +494,7 @@
 	line-height: 1.5;
 }
 
-.debug-master-file-path {
+.logmate-file-path {
 	display: block;
 	background: var(--dm-bg-tertiary);
 	padding: 10px 14px;
@@ -511,7 +511,7 @@
 	white-space: pre-wrap;
 }
 
-.debug-master-status-indicator {
+.logmate-status-indicator {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -534,24 +534,24 @@
 	color: var(--dm-text-primary);
 }
 
-.debug-master-toggle-wrapper {
+.logmate-toggle-wrapper {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	position: relative;
 }
 
-.debug-master-toggle-wrapper.debug-master-toggle-wrapper-column {
+.logmate-toggle-wrapper.logmate-toggle-wrapper-column {
 	flex-direction: column;
 	align-items: flex-start;
 }
 
-.debug-master-toggle-wrapper.debug-master-toggle-wrapper-column .debug-master-purge-inputs {
+.logmate-toggle-wrapper.logmate-toggle-wrapper-column .logmate-purge-inputs {
 	margin-top: 8px;
 	width: 100%;
 }
 
-.debug-master-toggle-loader {
+.logmate-toggle-loader {
 	display: flex !important;
 	align-items: center;
 	justify-content: center;
@@ -566,7 +566,7 @@
 	opacity: 1 !important;
 }
 
-.debug-master-toggle-loader .debug-master-spinner {
+.logmate-toggle-loader .logmate-spinner {
 	padding: 0 !important;
 	display: flex !important;
 	align-items: center;
@@ -577,7 +577,7 @@
 	opacity: 1 !important;
 }
 
-.debug-master-toggle-loader .debug-master-spinner .spinner {
+.logmate-toggle-loader .logmate-spinner .spinner {
 	width: 16px !important;
 	height: 16px !important;
 	border: 2px solid #9ca3af !important;
@@ -599,7 +599,7 @@
 	min-height: 16px !important;
 }
 
-.debug-master-toggle {
+.logmate-toggle {
 	position: relative;
 	display: inline-block;
 	width: 36px;
@@ -608,7 +608,7 @@
 	cursor: pointer;
 }
 
-.debug-master-toggle input {
+.logmate-toggle input {
 	opacity: 0 !important;
 	width: 0 !important;
 	height: 0 !important;
@@ -653,26 +653,26 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.debug-master-toggle input:checked + .toggle-slider {
+.logmate-toggle input:checked + .toggle-slider {
 	background-color: #22d172;
 	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(34, 209, 114, 0.15);
 }
 
-.debug-master-toggle input:checked + .toggle-slider:before {
+.logmate-toggle input:checked + .toggle-slider:before {
 	transform: translateX(16px);
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
-.debug-master-toggle input:disabled + .toggle-slider {
+.logmate-toggle input:disabled + .toggle-slider {
 	cursor: not-allowed;
 	opacity: 0.6;
 }
 
-.debug-master-purge-log-type {
+.logmate-purge-log-type {
 	margin-bottom: 20px;
 }
 
-.debug-master-purge-log-type > label {
+.logmate-purge-log-type > label {
 	display: block;
 	margin-bottom: 8px;
 	font-weight: 500;
@@ -680,20 +680,20 @@
 	font-size: 13px;
 }
 
-.debug-master-purge-options {
+.logmate-purge-options {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	margin-bottom: 24px;
 }
 
-.debug-master-radio-group {
+.logmate-radio-group {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 }
 
-.debug-master-radio-label {
+.logmate-radio-label {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -703,18 +703,18 @@
 	position: relative;
 }
 
-.debug-master-radio-label .debug-master-tooltip-wrapper {
+.logmate-radio-label .logmate-tooltip-wrapper {
 	margin-left: auto;
 }
 
-.debug-master-radio {
+.logmate-radio {
 	width: 18px;
 	height: 18px;
 	cursor: pointer;
 	accent-color: var(--dm-primary);
 }
 
-.debug-master-purge-inputs {
+.logmate-purge-inputs {
 	display: flex;
 	gap: 10px;
 	margin-left: 28px;
@@ -722,28 +722,28 @@
 	margin-top: 8px;
 }
 
-.debug-master-radio-control-wrapper {
+.logmate-radio-control-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 8px;
 }
 
-.debug-master-radio-control-wrapper .debug-master-radio-label {
+.logmate-radio-control-wrapper .logmate-radio-label {
 	margin: 0;
 }
 
-.debug-master-radio-control-wrapper .debug-master-purge-inputs {
+.logmate-radio-control-wrapper .logmate-purge-inputs {
 	margin: 0;
 }
 
-.debug-master-purge-confirm-content {
+.logmate-purge-confirm-content {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-.debug-master-purge-warning {
+.logmate-purge-warning {
 	display: flex;
 	align-items: flex-start;
 	gap: 12px;
@@ -753,13 +753,13 @@
 	border-radius: 6px;
 }
 
-.debug-master-purge-warning svg {
+.logmate-purge-warning svg {
 	color: #856404;
 	flex-shrink: 0;
 	margin-top: 2px;
 }
 
-.debug-master-purge-warning-text {
+.logmate-purge-warning-text {
 	margin: 0;
 	color: #856404;
 	font-size: 14px;
@@ -767,14 +767,14 @@
 	font-weight: 500;
 }
 
-.debug-master-purge-summary {
+.logmate-purge-summary {
 	padding: 12px;
 	background: var(--dm-bg-tertiary);
 	border-radius: 6px;
 	border: 1px solid var(--dm-border-light);
 }
 
-.debug-master-purge-summary-label {
+.logmate-purge-summary-label {
 	margin: 0 0 8px 0;
 	font-size: 13px;
 	font-weight: 600;
@@ -783,7 +783,7 @@
 	letter-spacing: 0.5px;
 }
 
-.debug-master-purge-summary-text {
+.logmate-purge-summary-text {
 	margin: 0;
 	font-size: 14px;
 	color: var(--dm-text-primary);
@@ -791,13 +791,13 @@
 }
 
 /* Tooltip Styles */
-.debug-master-tooltip-wrapper {
+.logmate-tooltip-wrapper {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
 }
 
-.debug-master-tooltip-icon {
+.logmate-tooltip-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -813,18 +813,18 @@
 	flex-shrink: 0;
 }
 
-.debug-master-tooltip-icon:hover {
+.logmate-tooltip-icon:hover {
 	color: var(--dm-primary);
 	background: var(--dm-bg-hover);
 }
 
-.debug-master-tooltip-trigger {
+.logmate-tooltip-trigger {
 	cursor: help;
 	display: inline-flex;
 	align-items: center;
 }
 
-.debug-master-react-tooltip {
+.logmate-react-tooltip {
 	max-width: 300px;
 	font-size: 13px !important;
 	line-height: 1.5 !important;
@@ -836,7 +836,7 @@
 	z-index: 10000 !important;
 }
 
-.debug-master-radio-label {
+.logmate-radio-label {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -846,8 +846,8 @@
 	position: relative;
 }
 
-.debug-master-input,
-.debug-master-select {
+.logmate-input,
+.logmate-select {
 	padding: 8px 12px;
 	border: 1px solid var(--dm-border-dark);
 	border-radius: 6px;
@@ -857,22 +857,22 @@
 	transition: all 0.2s;
 }
 
-.debug-master-input:focus,
-.debug-master-select:focus {
+.logmate-input:focus,
+.logmate-select:focus {
 	outline: none;
 	border-color: var(--dm-primary);
 	box-shadow: 0 0 0 3px rgba(188, 188, 188, 0.1);
 }
 
-.debug-master-datetime-input {
+.logmate-datetime-input {
 	min-width: 200px;
 }
 
-.debug-master-select {
+.logmate-select {
 	cursor: pointer;
 }
 
-.debug-master-spinner {
+.logmate-spinner {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -893,7 +893,7 @@
 	100% { transform: rotate(360deg); }
 }
 
-.debug-master-error {
+.logmate-error {
 	padding: 20px;
 	background: #fff3cd;
 	border: 1px solid var(--dm-warning);
@@ -901,12 +901,12 @@
 	color: #856404;
 }
 
-.debug-master-log-filters {
+.logmate-log-filters {
 	display: flex;
 	gap: 8px;
 }
 
-.debug-master-filter-btn {
+.logmate-filter-btn {
 	padding: 8px 12px;
 	border: 1px solid var(--dm-border-dark);
 	background: var(--dm-bg-primary);
@@ -920,30 +920,30 @@
 	color: var(--dm-text-light);
 }
 
-.debug-master-filter-btn:hover {
+.logmate-filter-btn:hover {
 	background: var(--dm-bg-secondary);
 	border-color: var(--dm-primary);
 	color: var(--dm-text-primary);
 }
 
-.debug-master-filter-btn.active {
+.logmate-filter-btn.active {
 	background: var(--dm-primary);
 	color: var(--dm-text-white);
 	border-color: var(--dm-primary);
 }
 
-.debug-master-filter-btn.active:hover {
+.logmate-filter-btn.active:hover {
 	background: var(--dm-primary-dark);
 	border-color: var(--dm-primary-dark);
 }
 
-.debug-master-filter-btn-text {
+.logmate-filter-btn-text {
 	font-size: 12px;
 	font-weight: 500;
 	opacity: 0.9;
 }
 
-.debug-master-filter-btn.active .debug-master-filter-btn-text {
+.logmate-filter-btn.active .logmate-filter-btn-text {
 	opacity: 1;
 }
 
@@ -967,7 +967,7 @@
 }
 
 /* Modal Styles */
-.debug-master-modal-overlay {
+.logmate-modal-overlay {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -980,7 +980,7 @@
 	z-index: 10000;
 }
 
-.debug-master-modal {
+.logmate-modal {
 	background: var(--dm-bg-primary);
 	border-radius: 8px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -992,7 +992,7 @@
 	overflow: hidden;
 }
 
-.debug-master-modal-header {
+.logmate-modal-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -1000,13 +1000,13 @@
 	border-bottom: 1px solid var(--dm-border-light);
 }
 
-.debug-master-modal-header h2 {
+.logmate-modal-header h2 {
 	margin: 0;
 	font-size: 20px;
 	color: var(--dm-text-primary);
 }
 
-.debug-master-modal-close {
+.logmate-modal-close {
 	background: none;
 	border: none;
 	cursor: pointer;
@@ -1018,35 +1018,35 @@
 	transition: color 0.2s;
 }
 
-.debug-master-modal-close:hover {
+.logmate-modal-close:hover {
 	color: var(--dm-text-primary);
 }
 
-.debug-master-modal-body {
+.logmate-modal-body {
 	padding: 20px;
 	flex: 1;
 	overflow-y: auto;
 }
 
-.debug-master-modal-body p {
+.logmate-modal-body p {
 	margin: 0;
 	color: var(--dm-text-light);
 	line-height: 1.6;
 }
 
-.debug-master-export-options {
+.logmate-export-options {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 }
 
-.debug-master-radio-group {
+.logmate-radio-group {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
 }
 
-.debug-master-radio-label {
+.logmate-radio-label {
 	display: flex;
 	align-items: center;
 	gap: 10px;
@@ -1055,34 +1055,34 @@
 	font-weight: 500;
 }
 
-.debug-master-radio {
+.logmate-radio {
 	width: 18px;
 	height: 18px;
 	cursor: pointer;
 	accent-color: var(--dm-primary);
 }
 
-.debug-master-date-range-inputs {
+.logmate-date-range-inputs {
 	display: flex;
 	gap: 15px;
 	margin-left: 28px;
 	margin-top: 8px;
 }
 
-.debug-master-date-input-group {
+.logmate-date-input-group {
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
 	flex: 1;
 }
 
-.debug-master-date-input-group label {
+.logmate-date-input-group label {
 	font-size: 13px;
 	font-weight: 500;
 	color: var(--dm-text-secondary);
 }
 
-.debug-master-datetime-input {
+.logmate-datetime-input {
 	padding: 8px 12px;
 	border: 1px solid var(--dm-border-dark);
 	border-radius: 4px;
@@ -1090,13 +1090,13 @@
 	width: 100%;
 }
 
-.debug-master-datetime-input:focus {
+.logmate-datetime-input:focus {
 	outline: none;
 	border-color: var(--dm-primary);
 	box-shadow: 0 0 0 2px rgba(188, 188, 188, 0.1);
 }
 
-.debug-master-modal-footer {
+.logmate-modal-footer {
 	display: flex;
 	justify-content: flex-end;
 	gap: 10px;
@@ -1105,7 +1105,7 @@
 }
 
 /* Rotating Refresh Icon */
-.debug-master-refresh-icon-rotating {
+.logmate-refresh-icon-rotating {
 	animation: rotate 1s linear infinite;
 }
 
@@ -1119,32 +1119,32 @@
 }
 
 /* Table Loading and Empty States */
-.debug-master-table-loading {
+.logmate-table-loading {
 	text-align: center;
 	padding: 40px !important;
 }
 
-.debug-master-table-empty {
+.logmate-table-empty {
 	text-align: center;
 	padding: 40px !important;
 	color: var(--dm-text-light);
 	font-style: italic;
 }
 
-.debug-master-btn:disabled {
+.logmate-btn:disabled {
 	opacity: 0.6;
 	cursor: not-allowed;
 }
 
 /* Skeleton Loader Styles */
-.debug-master-skeleton {
+.logmate-skeleton {
 	display: flex;
 	align-items: center;
 	height: 20px;
 	width: 100%;
 }
 
-.debug-master-skeleton-line {
+.logmate-skeleton-line {
 	height: 14px;
 	background: linear-gradient(
 		90deg,
@@ -1168,19 +1168,19 @@
 	}
 }
 
-.debug-master-table tbody tr td .debug-master-skeleton {
+.logmate-table tbody tr td .logmate-skeleton {
 	padding: 4px 0;
 }
 
 /* System Info Mosaic Styles */
-.debug-master-system-info-mosaic {
+.logmate-system-info-mosaic {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	gap: 16px;
 	grid-auto-rows: auto;
 }
 
-.debug-master-mosaic-card {
+.logmate-mosaic-card {
 	background: #fff;
 	border-radius: 8px;
 	padding: 20px;
@@ -1188,18 +1188,18 @@
 	grid-column: span 4;
 }
 
-.debug-master-mosaic-card.debug-master-card-large {
+.logmate-mosaic-card.logmate-card-large {
 	grid-column: span 8;
 }
 
 /* Card Header */
-.debug-master-card-header {
+.logmate-card-header {
 	margin-bottom: 16px;
 	padding-bottom: 12px;
 	border-bottom: 1px solid var(--dm-border);
 }
 
-.debug-master-card-header h2 {
+.logmate-card-header h2 {
 	margin: 0;
 	font-size: 16px;
 	font-weight: 600;
@@ -1207,29 +1207,29 @@
 }
 
 /* Card Content */
-.debug-master-card-content {
+.logmate-card-content {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 }
 
-.debug-master-stat-grid {
+.logmate-stat-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 16px;
 }
 
-.debug-master-stat-item {
+.logmate-stat-item {
 	display: flex;
 	flex-direction: column;
 	gap: 6px;
 }
 
-.debug-master-stat-item.debug-master-stat-fullwidth {
+.logmate-stat-item.logmate-stat-fullwidth {
 	grid-column: 1 / -1;
 }
 
-.debug-master-stat-label {
+.logmate-stat-label {
 	font-size: 11px;
 	font-weight: 600;
 	color: var(--dm-text-muted);
@@ -1237,7 +1237,7 @@
 	letter-spacing: 0.8px;
 }
 
-.debug-master-stat-value {
+.logmate-stat-value {
 	font-size: 16px;
 	font-weight: 700;
 	color: var(--dm-text-primary);
@@ -1246,7 +1246,7 @@
 }
 
 
-.debug-master-stat-value.debug-master-stat-path {
+.logmate-stat-value.logmate-stat-path {
 	font-size: 12px;
 	word-break: break-all;
 	line-height: 1.6;
@@ -1256,30 +1256,30 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-	.debug-master-system-info-mosaic {
+	.logmate-system-info-mosaic {
 		grid-template-columns: repeat(6, 1fr);
 	}
 
-	.debug-master-mosaic-card {
+	.logmate-mosaic-card {
 		grid-column: span 3;
 	}
 
-	.debug-master-card-large {
+	.logmate-card-large {
 		grid-column: span 6;
 	}
 
-	.debug-master-stat-grid {
+	.logmate-stat-grid {
 		grid-template-columns: 1fr;
 	}
 
-	.debug-master-stat-item.debug-master-stat-fullwidth {
+	.logmate-stat-item.logmate-stat-fullwidth {
 		grid-column: span 1;
 	}
 }
 
 /* System Info responsive styles are now in the comprehensive mobile section below */
 
-.debug-master-plugins-list {
+.logmate-plugins-list {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
@@ -1287,7 +1287,7 @@
 	overflow-y: auto;
 }
 
-.debug-master-plugin-item {
+.logmate-plugin-item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -1297,12 +1297,12 @@
 	border: 1px solid var(--dm-border);
 }
 
-.debug-master-plugin-item.active {
+.logmate-plugin-item.active {
 	background: var(--dm-bg-tertiary);
 	border-color: var(--dm-border-dark);
 }
 
-.debug-master-plugin-name {
+.logmate-plugin-name {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -1311,7 +1311,7 @@
 	color: var(--dm-text-primary);
 }
 
-.debug-master-plugin-badge {
+.logmate-plugin-badge {
 	font-size: 11px;
 	font-weight: 600;
 	padding: 2px 8px;
@@ -1322,7 +1322,7 @@
 	letter-spacing: 0.5px;
 }
 
-.debug-master-plugin-version {
+.logmate-plugin-version {
 	font-size: 12px;
 	color: var(--dm-text-muted);
 	font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
@@ -1340,40 +1340,40 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
 	/* Main App Container */
-	.debug-master-app {
+	.logmate-app {
 		padding: 10px;
 		margin-left: -10px;
 		gap: 15px;
 	}
 
-	.debug-master-screen {
+	.logmate-screen {
 		padding: 10px;
 	}
 
 	/* Floating Menu */
-	.debug-master-menu-container {
+	.logmate-menu-container {
 		bottom: 15px;
 		right: 15px;
 	}
 
-	.debug-master-floating-menu-toggle {
+	.logmate-floating-menu-toggle {
 		width: 48px;
 		height: 48px;
 	}
 
-	.debug-master-floating-menu-toggle svg {
+	.logmate-floating-menu-toggle svg {
 		width: 20px;
 		height: 20px;
 	}
 
-	.debug-master-dropdown-menu {
+	.logmate-dropdown-menu {
 		bottom: calc(48px + 10px);
 		right: 0;
 		min-width: 180px;
 	}
 
 	/* Meta Bar */
-	.debug-master-meta-bar {
+	.logmate-meta-bar {
 		flex-direction: column;
 		gap: 10px;
 		padding: 12px;
@@ -1381,48 +1381,48 @@
 	}
 
 	/* Table Container */
-	.debug-master-table-container {
+	.logmate-table-container {
 		padding: 15px;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 	}
 
 	/* Table Toolbar */
-	.debug-master-table-toolbar {
+	.logmate-table-toolbar {
 		flex-direction: column;
 		align-items: stretch;
 		gap: 12px;
 	}
 
-	.debug-master-table-toolbar-left {
+	.logmate-table-toolbar-left {
 		flex-direction: column;
 		width: 100%;
 	}
 
-	.debug-master-search {
+	.logmate-search {
 		max-width: 100%;
 		width: 100%;
 	}
 
-	.debug-master-table-actions {
+	.logmate-table-actions {
 		flex-wrap: wrap;
 		width: 100%;
 	}
 
-	.debug-master-table-actions .debug-master-btn {
+	.logmate-table-actions .logmate-btn {
 		flex: 1;
 		min-width: calc(50% - 5px);
 		justify-content: center;
 	}
 
 	/* Table */
-	.debug-master-table {
+	.logmate-table {
 		font-size: 12px;
 		min-width: 600px;
 	}
 
-	.debug-master-table th,
-	.debug-master-table td {
+	.logmate-table th,
+	.logmate-table td {
 		padding: 8px;
 	}
 
@@ -1437,159 +1437,159 @@
 	}
 
 	/* Settings */
-	.debug-master-settings {
+	.logmate-settings {
 		padding: 20px 15px;
 	}
 
-	.debug-master-settings-section {
+	.logmate-settings-section {
 		margin-bottom: 30px;
 		padding-bottom: 20px;
 	}
 
-	.debug-master-settings-section h2 {
+	.logmate-settings-section h2 {
 		font-size: 18px;
 		margin-bottom: 15px;
 	}
 
-	.debug-master-setting-item {
+	.logmate-setting-item {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 12px;
 		padding: 15px;
 	}
 
-	.debug-master-setting-label-wrapper {
+	.logmate-setting-label-wrapper {
 		width: 100%;
 	}
 
-	.debug-master-setting-controls {
+	.logmate-setting-controls {
 		width: 100%;
 		justify-content: space-between;
 	}
 
-	.debug-master-toggle-wrapper {
+	.logmate-toggle-wrapper {
 		width: 100%;
 		justify-content: flex-end;
 	}
 
 	/* System Info Cards */
-	.debug-master-system-info-mosaic {
+	.logmate-system-info-mosaic {
 		grid-template-columns: 1fr;
 		gap: 15px;
 	}
 
-	.debug-master-mosaic-card,
-	.debug-master-card-large {
+	.logmate-mosaic-card,
+	.logmate-card-large {
 		grid-column: span 1 !important;
 	}
 
-	.debug-master-card-header h2 {
+	.logmate-card-header h2 {
 		font-size: 16px;
 	}
 
-	.debug-master-stat-grid {
+	.logmate-stat-grid {
 		grid-template-columns: 1fr;
 		gap: 12px;
 	}
 
-	.debug-master-stat-item {
+	.logmate-stat-item {
 		padding: 12px;
 	}
 
-	.debug-master-stat-label {
+	.logmate-stat-label {
 		font-size: 12px;
 	}
 
-	.debug-master-stat-value {
+	.logmate-stat-value {
 		font-size: 14px;
 	}
 
-	.debug-master-stat-value.debug-master-stat-path {
+	.logmate-stat-value.logmate-stat-path {
 		font-size: 11px;
 		word-break: break-all;
 	}
 
 	/* Modal */
-	.debug-master-modal {
+	.logmate-modal {
 		width: 95%;
 		max-width: 95%;
 		margin: 10px;
 		max-height: 85vh;
 	}
 
-	.debug-master-modal-header {
+	.logmate-modal-header {
 		padding: 15px;
 	}
 
-	.debug-master-modal-header h2 {
+	.logmate-modal-header h2 {
 		font-size: 18px;
 	}
 
-	.debug-master-modal-body {
+	.logmate-modal-body {
 		padding: 15px;
 		max-height: calc(85vh - 120px);
 		overflow-y: auto;
 	}
 
-	.debug-master-modal-footer {
+	.logmate-modal-footer {
 		padding: 15px;
 		flex-direction: column;
 		gap: 10px;
 	}
 
-	.debug-master-modal-footer .debug-master-btn {
+	.logmate-modal-footer .logmate-btn {
 		width: 100%;
 		justify-content: center;
 	}
 
 	/* Export Modal */
-	.debug-master-export-options {
+	.logmate-export-options {
 		gap: 15px;
 	}
 
-	.debug-master-date-range-inputs {
+	.logmate-date-range-inputs {
 		flex-direction: column;
 		gap: 12px;
 	}
 
-	.debug-master-datetime-input {
+	.logmate-datetime-input {
 		min-width: 100%;
 		width: 100%;
 	}
 
 	/* Purge Modal */
-	.debug-master-purge-confirm-content {
+	.logmate-purge-confirm-content {
 		gap: 15px;
 	}
 
-	.debug-master-purge-warning {
+	.logmate-purge-warning {
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 10px;
 	}
 
-	.debug-master-purge-warning-text {
+	.logmate-purge-warning-text {
 		font-size: 13px;
 	}
 
 	/* Buttons */
-	.debug-master-btn {
+	.logmate-btn {
 		padding: 10px 14px;
 		font-size: 12px;
 	}
 
-	.debug-master-btn svg {
+	.logmate-btn svg {
 		width: 16px;
 		height: 16px;
 	}
 
 	/* Filter Buttons */
-	.debug-master-log-filters {
+	.logmate-log-filters {
 		flex-wrap: wrap;
 		gap: 6px;
 	}
 
-	.debug-master-filter-btn {
+	.logmate-filter-btn {
 		padding: 6px 10px;
 		font-size: 11px;
 		flex: 1;
@@ -1598,56 +1598,56 @@
 	}
 
 	/* Pagination */
-	.debug-master-pagination {
+	.logmate-pagination {
 		flex-wrap: wrap;
 		gap: 8px;
 	}
 
-	.debug-master-pagination .debug-master-btn {
+	.logmate-pagination .logmate-btn {
 		padding: 8px 12px;
 		font-size: 12px;
 	}
 
 	/* Inputs and Selects */
-	.debug-master-input,
-	.debug-master-select {
+	.logmate-input,
+	.logmate-select {
 		font-size: 14px;
 		padding: 10px 12px;
 		width: 100%;
 	}
 
 	/* Radio Groups */
-	.debug-master-radio-group {
+	.logmate-radio-group {
 		flex-direction: column;
 		gap: 12px;
 	}
 
-	.debug-master-radio-label {
+	.logmate-radio-label {
 		width: 100%;
 	}
 
 	/* Tooltip */
-	.debug-master-react-tooltip {
+	.logmate-react-tooltip {
 		max-width: 250px;
 		font-size: 12px !important;
 		padding: 8px 12px !important;
 	}
 
 	/* Log Purge Settings */
-	.debug-master-purge-settings {
+	.logmate-purge-settings {
 		padding: 15px;
 	}
 
-	.debug-master-purge-settings h3 {
+	.logmate-purge-settings h3 {
 		font-size: 16px;
 	}
 
-	.debug-master-purge-options {
+	.logmate-purge-options {
 		flex-direction: column;
 		gap: 12px;
 	}
 
-	.debug-master-purge-option {
+	.logmate-purge-option {
 		width: 100%;
 	}
 
@@ -1666,70 +1666,70 @@
 
 @media (max-width: 480px) {
 	/* Extra small devices */
-	.debug-master-app {
+	.logmate-app {
 		padding: 8px;
 		margin-left: -8px;
 	}
 
-	.debug-master-screen {
+	.logmate-screen {
 		padding: 8px;
 	}
 
-	.debug-master-floating-menu-toggle {
+	.logmate-floating-menu-toggle {
 		width: 44px;
 		height: 44px;
 	}
 
-	.debug-master-floating-menu-toggle svg {
+	.logmate-floating-menu-toggle svg {
 		width: 18px;
 		height: 18px;
 	}
 
-	.debug-master-menu-container {
+	.logmate-menu-container {
 		bottom: 10px;
 		right: 10px;
 	}
 
-	.debug-master-dropdown-menu {
+	.logmate-dropdown-menu {
 		bottom: calc(44px + 8px);
 		min-width: 160px;
 	}
 
-	.debug-master-settings {
+	.logmate-settings {
 		padding: 15px 10px;
 	}
 
-	.debug-master-table-container {
+	.logmate-table-container {
 		padding: 10px;
 	}
 
-	.debug-master-table {
+	.logmate-table {
 		font-size: 11px;
 	}
 
-	.debug-master-table th,
-	.debug-master-table td {
+	.logmate-table th,
+	.logmate-table td {
 		padding: 6px;
 	}
 
-	.debug-master-modal {
+	.logmate-modal {
 		width: 98%;
 		max-width: 98%;
 		margin: 5px;
 	}
 
-	.debug-master-modal-header,
-	.debug-master-modal-body,
-	.debug-master-modal-footer {
+	.logmate-modal-header,
+	.logmate-modal-body,
+	.logmate-modal-footer {
 		padding: 12px;
 	}
 
-	.debug-master-btn {
+	.logmate-btn {
 		padding: 8px 12px;
 		font-size: 11px;
 	}
 
-	.debug-master-filter-btn {
+	.logmate-filter-btn {
 		font-size: 10px;
 		padding: 5px 8px;
 	}
@@ -1742,32 +1742,32 @@
 
 /* Tablet adjustments */
 @media (min-width: 769px) and (max-width: 1024px) {
-	.debug-master-app {
+	.logmate-app {
 		padding: 15px;
 		margin-left: -15px;
 	}
 
-	.debug-master-table-toolbar {
+	.logmate-table-toolbar {
 		flex-wrap: wrap;
 	}
 
-	.debug-master-table-toolbar-left {
+	.logmate-table-toolbar-left {
 		flex: 1 1 100%;
 	}
 
-	.debug-master-search {
+	.logmate-search {
 		max-width: 100%;
 	}
 
-	.debug-master-system-info-mosaic {
+	.logmate-system-info-mosaic {
 		grid-template-columns: repeat(2, 1fr);
 	}
 
-	.debug-master-mosaic-card {
+	.logmate-mosaic-card {
 		grid-column: span 1;
 	}
 
-	.debug-master-card-large {
+	.logmate-card-large {
 		grid-column: span 2;
 	}
 }

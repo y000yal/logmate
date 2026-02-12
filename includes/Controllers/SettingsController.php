@@ -1,21 +1,21 @@
 <?php
 /**
- * Settings Controller for Debug Master plugin.
+ * Settings Controller for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Controllers;
+namespace LogMate\Controllers;
 
-use DebugMaster\Controllers\Controller as BaseController;
-use DebugMaster\Services\WpConfigService;
+use LogMate\Controllers\Controller as BaseController;
+use LogMate\Services\WpConfigService;
 use WP_Rest_Request;
 use WP_REST_Response;
 
 /**
  * Settings Controller for managing plugin settings.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class SettingsController extends BaseController {
 
@@ -62,7 +62,7 @@ class SettingsController extends BaseController {
 				return $this->response(
 					array(
 						'success' => false,
-						'message' => __( 'Log file path not configured.', 'debug-monitor' ),
+						'message' => __( 'Log file path not configured.', 'logmate' ),
 					),
 					400
 				);
@@ -81,7 +81,7 @@ class SettingsController extends BaseController {
 				return $this->response(
 					array(
 						'success' => false,
-						'message' => __( 'Failed to enable debug logging.', 'debug-monitor' ),
+						'message' => __( 'Failed to enable debug logging.', 'logmate' ),
 					),
 					500
 				);
@@ -98,8 +98,8 @@ class SettingsController extends BaseController {
 				'success' => true,
 				'status'  => $new_status,
 				'message' => 'enabled' === $new_status
-					? __( 'Debug logging enabled.', 'debug-monitor' )
-					: __( 'Debug logging disabled.', 'debug-monitor' ),
+					? __( 'Debug logging enabled.', 'logmate' )
+					: __( 'Debug logging disabled.', 'logmate' ),
 			),
 			200
 		);
@@ -148,7 +148,7 @@ class SettingsController extends BaseController {
 		return $this->response(
 			array(
 				'success' => true,
-				'message' => __( 'Settings updated successfully.', 'debug-monitor' ),
+				'message' => __( 'Settings updated successfully.', 'logmate' ),
 			),
 			200
 		);

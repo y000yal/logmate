@@ -3,15 +3,15 @@
  * WordPress Config Service for managing wp-config.php.
  *
  * @since 1.0.0
- * @package DebugMaster\Services
+ * @package LogMate\Services
  */
 
-namespace DebugMaster\Services;
+namespace LogMate\Services;
 
 /**
  * WpConfigService class for managing wp-config.php modifications.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class WpConfigService {
 

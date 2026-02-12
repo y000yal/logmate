@@ -23,7 +23,7 @@ export const Modal: React.FC<ModalProps> = ( {
 	children,
 	confirmText = 'Confirm',
 	cancelText = 'Cancel',
-	confirmButtonClass = 'debug-master-btn-danger',
+	confirmButtonClass = 'logmate-btn-danger',
 	disabled = false,
 } ) => {
 	useEffect( () => {
@@ -56,28 +56,28 @@ export const Modal: React.FC<ModalProps> = ( {
 	}
 
 	return (
-		<div className="debug-master-modal-overlay" onClick={ onClose }>
-			<div className="debug-master-modal" onClick={ ( e ) => e.stopPropagation() }>
-				<div className="debug-master-modal-header">
+		<div className="logmate-modal-overlay" onClick={ onClose }>
+			<div className="logmate-modal" onClick={ ( e ) => e.stopPropagation() }>
+				<div className="logmate-modal-header">
 					<h2>{ title }</h2>
-					<button className="debug-master-modal-close" onClick={ onClose }>
+					<button className="logmate-modal-close" onClick={ onClose }>
 						<X size={ 20 } />
 					</button>
 				</div>
-				<div className="debug-master-modal-body">
+				<div className="logmate-modal-body">
 					{ message && <p>{ message }</p> }
 					{ children }
 				</div>
-				<div className="debug-master-modal-footer">
+				<div className="logmate-modal-footer">
 					<button
-						className="debug-master-btn debug-master-btn-secondary"
+						className="logmate-btn logmate-btn-secondary"
 						onClick={ onClose }
 						disabled={ disabled }
 					>
 						{ cancelText }
 					</button>
 					<button
-						className={ `debug-master-btn ${ confirmButtonClass }` }
+						className={ `logmate-btn ${ confirmButtonClass }` }
 						onClick={ onConfirm }
 						disabled={ disabled }
 					>

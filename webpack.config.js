@@ -1,7 +1,7 @@
 /**
- * Webpack configuration for Debug Master plugin.
+ * Webpack configuration for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 const path = require( 'path' );

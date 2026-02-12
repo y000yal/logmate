@@ -3,15 +3,15 @@
  * Log Purge Service for date-based log purging.
  *
  * @since 1.0.0
- * @package DebugMaster\Services
+ * @package LogMate\Services
  */
 
-namespace DebugMaster\Services;
+namespace LogMate\Services;
 
 /**
  * LogPurgeService class for purging logs by date criteria.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class LogPurgeService {
 
@@ -37,12 +37,12 @@ class LogPurgeService {
 	 * @return array Result with deleted count.
 	 */
 	public function purge_before_date( string $log_file_path, string $before_date ): array {
-		$filesystem = debugm_get_filesystem();
+		$filesystem = logmate_get_filesystem();
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_readable( $log_file_path ) ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Log file not found or not readable.', 'debug-monitor' ),
+				'message' => __( 'Log file not found or not readable.', 'logmate' ),
 			);
 		}
 
@@ -57,7 +57,7 @@ class LogPurgeService {
 		if ( false === $target_time ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Invalid date format.', 'debug-monitor' ),
+				'message' => __( 'Invalid date format.', 'logmate' ),
 			);
 		}
 
@@ -93,7 +93,7 @@ class LogPurgeService {
 				'success'      => true,
 				'message'      => sprintf(
 					// translators: %d is the number of entries deleted.
-					__( 'Deleted %d log entries.', 'debug-monitor' ),
+					__( 'Deleted %d log entries.', 'logmate' ),
 					$deleted_count
 				),
 				'deleted_count' => $deleted_count,
@@ -102,7 +102,7 @@ class LogPurgeService {
 
 		return array(
 			'success' => false,
-			'message' => __( 'Failed to write log file.', 'debug-monitor' ),
+			'message' => __( 'Failed to write log file.', 'logmate' ),
 		);
 	}
 
@@ -119,7 +119,7 @@ class LogPurgeService {
 		if ( ! in_array( $period, $valid_periods, true ) ) {
 			return array(
 				'success' => false,
-				'message' => __( 'Invalid period type.', 'debug-monitor' ),
+				'message' => __( 'Invalid period type.', 'logmate' ),
 			);
 		}
 

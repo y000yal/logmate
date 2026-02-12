@@ -79,9 +79,9 @@ export const LogsScreen: React.FC = () => {
 	}, [ autorefreshEnabled, logStatusEnabled, refetch ] ); // Depend on autorefreshEnabled, logStatusEnabled, and refetch
 
 	return (
-		<div className="debug-master-screen">
+		<div className="logmate-screen">
 			{ error ? (
-				<div className="debug-master-error">
+				<div className="logmate-error">
 					Error loading logs. Please try again.
 				</div>
 			) : (

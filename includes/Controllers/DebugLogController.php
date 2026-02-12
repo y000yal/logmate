@@ -1,21 +1,21 @@
 <?php
 /**
- * Debug Log Controller for Debug Master plugin.
+ * Debug Log Controller for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Controllers;
+namespace LogMate\Controllers;
 
-use DebugMaster\Controllers\Controller as BaseController;
-use DebugMaster\Services\DebugLogService;
+use LogMate\Controllers\Controller as BaseController;
+use LogMate\Services\DebugLogService;
 use WP_Rest_Request;
 use WP_REST_Response;
 
 /**
  * Debug Log Controller for managing log entries.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class DebugLogController extends BaseController {
 
@@ -123,7 +123,7 @@ class DebugLogController extends BaseController {
 				$cleared_php = $this->log_service->clear_log_file( $php_log_file_path );
 				if ( $cleared_php ) {
 					$cleared = true;
-					$messages[] = __( 'PHP log file cleared successfully.', 'debug-monitor' );
+					$messages[] = __( 'PHP log file cleared successfully.', 'logmate' );
 				}
 			}
 		}
@@ -135,7 +135,7 @@ class DebugLogController extends BaseController {
 				$cleared_js = $this->log_service->clear_log_file( $js_log_file_path );
 				if ( $cleared_js ) {
 					$cleared = true;
-					$messages[] = __( 'JavaScript log file cleared successfully.', 'debug-monitor' );
+					$messages[] = __( 'JavaScript log file cleared successfully.', 'logmate' );
 				}
 			}
 		}
@@ -153,7 +153,7 @@ class DebugLogController extends BaseController {
 		return $this->response(
 			array(
 				'success' => false,
-				'message' => __( 'Failed to clear log file(s).', 'debug-monitor' ),
+				'message' => __( 'Failed to clear log file(s).', 'logmate' ),
 			),
 			500
 		);
@@ -172,7 +172,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'JavaScript error logging is disabled.', 'debug-monitor' ),
+					'message' => __( 'JavaScript error logging is disabled.', 'logmate' ),
 				),
 				403
 			);
@@ -184,7 +184,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Invalid nonce.', 'debug-monitor' ),
+					'message' => __( 'Invalid nonce.', 'logmate' ),
 				),
 				403
 			);
@@ -197,7 +197,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Missing required fields.', 'debug-monitor' ),
+					'message' => __( 'Missing required fields.', 'logmate' ),
 				),
 				400
 			);
@@ -218,7 +218,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'JavaScript log file path not configured.', 'debug-monitor' ),
+					'message' => __( 'JavaScript log file path not configured.', 'logmate' ),
 				),
 				400
 			);
@@ -239,7 +239,7 @@ class DebugLogController extends BaseController {
 		);
 
 		// Write directly to JS log file.
-		$filesystem = debugm_get_filesystem();
+		$filesystem = logmate_get_filesystem();
 		if ( $filesystem ) {
 			// WP_Filesystem doesn't support FILE_APPEND, so read existing content first.
 			$existing_content = $filesystem->get_contents( $js_log_file_path );
@@ -254,7 +254,7 @@ class DebugLogController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Failed to write to JavaScript log file.', 'debug-monitor' ),
+					'message' => __( 'Failed to write to JavaScript log file.', 'logmate' ),
 				),
 				500
 			);
@@ -263,7 +263,7 @@ class DebugLogController extends BaseController {
 		return $this->response(
 			array(
 				'success' => true,
-				'message' => __( 'JavaScript error logged successfully.', 'debug-monitor' ),
+				'message' => __( 'JavaScript error logged successfully.', 'logmate' ),
 			),
 			200
 		);
@@ -318,7 +318,7 @@ class DebugLogController extends BaseController {
 		if ( empty( $export_content ) ) {
 			return new \WP_Error(
 				'no_logs',
-				__( 'No logs found to export.', 'debug-monitor' ),
+				__( 'No logs found to export.', 'logmate' ),
 				array( 'status' => 404 )
 			);
 		}
@@ -354,7 +354,7 @@ class DebugLogController extends BaseController {
 	 * @return string
 	 */
 	private function get_export_content( string $log_file_path, string $export_type, ?string $start_date = null, ?string $end_date = null ): string {
-		$filesystem = debugm_get_filesystem();
+		$filesystem = logmate_get_filesystem();
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_exists
 		if ( ! file_exists( $log_file_path ) || ! is_readable( $log_file_path ) ) {
 			return '';

@@ -1,7 +1,7 @@
 /**
  * Tailwind CSS configuration file.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 const plugin = require( 'tailwindcss/plugin' );

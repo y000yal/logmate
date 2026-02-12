@@ -1,13 +1,13 @@
 <?php
 /**
- * System Info Routes for Debug Master plugin.
+ * System Info Routes for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Routes;
+namespace LogMate\Routes;
 
-use DebugMaster\Controllers\SystemInfoController;
+use LogMate\Controllers\SystemInfoController;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -15,7 +15,7 @@ use WP_REST_Response;
 /**
  * System Info Routes class for managing system info REST endpoints.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class SystemInfoRoutes extends AbstractRoutes {
 

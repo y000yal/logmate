@@ -2,21 +2,21 @@
 
 /**
  * Plugin Name: LogMate
- * Plugin URI: https://brutefort.com/#/products/debug-master
+ * Plugin URI: https://brutefort.com/#/products/logmate
  * Description: Modern log management and export for WordPress with purging, filtering, and export. by BruteFort
  * Version: 1.0.0
  * Author: Y0000el
  * Author URI: https://yoyallimbu.com.np
- * Text Domain: debug-monitor
+ * Text Domain: logmate
  * Domain Path: /languages/
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-use DebugMaster\Routes\Routes;
-use DebugMaster\Settings;
+use LogMate\Routes\Routes;
+use LogMate\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -28,9 +28,9 @@ if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
 /**
  * Plugin main class.
  *
- * @package DebugMaster
+ * @package LogMate
  */
-final class DebugMaster {
+final class LogMate {
 
 	/**
 	 * Plugin version.
@@ -42,16 +42,16 @@ final class DebugMaster {
 	/**
 	 * Singleton instance.
 	 *
-	 * @var DebugMaster|null
+	 * @var LogMate|null
 	 */
-	protected static ?DebugMaster $_instance = null;
+	protected static ?LogMate $_instance = null;
 
 	/**
 	 * Get singleton instance.
 	 *
-	 * @return DebugMaster
+	 * @return LogMate
 	 */
-	public static function instance(): DebugMaster {
+	public static function instance(): LogMate {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
@@ -60,7 +60,7 @@ final class DebugMaster {
 	}
 
 	/**
-	 * Constructor for DebugMaster.
+	 * Constructor for LogMate.
 	 */
 	private function __construct() {
 		add_filter( 'doing_it_wrong_trigger_error', array( $this, 'filter_doing_it_wrong' ), 10, 4 );
@@ -88,17 +88,17 @@ final class DebugMaster {
 	 * Define plugin constants.
 	 */
 	private function define_constants(): void {
-		$upload_dir = apply_filters( 'debugm_upload_dir', wp_upload_dir() );
+		$upload_dir = apply_filters( 'logmate_upload_dir', wp_upload_dir() );
 
-		$this->define( 'DEBUGM_UPLOAD_PATH', $upload_dir['basedir'] . '/debug-master/' );
-		$this->define( 'DEBUGM_UPLOAD_URL', $upload_dir['baseurl'] . '/debug-master/' );
-		$this->define( 'DEBUGM_DS', DIRECTORY_SEPARATOR );
-		$this->define( 'DEBUGM_PLUGIN_FILE', __FILE__ );
-		$this->define( 'DEBUGM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-		$this->define( 'DEBUGM_ASSETS_URL', DEBUGM_PLUGIN_URL . 'assets' );
-		$this->define( 'DEBUGM_ABSPATH', __DIR__ . DEBUGM_DS );
-		$this->define( 'DEBUGM_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-		$this->define( 'DEBUGM_VERSION', $this->version );
+		$this->define( 'LOGMATE_UPLOAD_PATH', $upload_dir['basedir'] . '/logmate/' );
+		$this->define( 'LOGMATE_UPLOAD_URL', $upload_dir['baseurl'] . '/logmate/' );
+		$this->define( 'LOGMATE_DS', DIRECTORY_SEPARATOR );
+		$this->define( 'LOGMATE_PLUGIN_FILE', __FILE__ );
+		$this->define( 'LOGMATE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+		$this->define( 'LOGMATE_ASSETS_URL', LOGMATE_PLUGIN_URL . 'assets' );
+		$this->define( 'LOGMATE_ABSPATH', __DIR__ . LOGMATE_DS );
+		$this->define( 'LOGMATE_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+		$this->define( 'LOGMATE_VERSION', $this->version );
 	}
 
 	/**
@@ -157,16 +157,16 @@ final class DebugMaster {
 	}
 
 	/**
-	 * Init DebugMaster when WordPress initializes.
+	 * Init LogMate when WordPress initializes.
 	 *
 	 * @return void
 	 */
 	public function init(): void {
 		// Before init action.
-		do_action( 'debugm_before_init' );
+		do_action( 'logmate_before_init' );
 
 		// Init action.
-		do_action( 'debugm_init' );
+		do_action( 'logmate_init' );
 	}
 
 	/**
@@ -197,7 +197,7 @@ final class DebugMaster {
 	 * @return string
 	 */
 	public function plugin_url(): string {
-		return untrailingslashit( plugins_url( '/', DEBUGM_PLUGIN_FILE ) );
+		return untrailingslashit( plugins_url( '/', LOGMATE_PLUGIN_FILE ) );
 	}
 
 	/**
@@ -206,7 +206,7 @@ final class DebugMaster {
 	 * @return string
 	 */
 	public function plugin_path(): string {
-		return untrailingslashit( plugin_dir_path( DEBUGM_PLUGIN_FILE ) );
+		return untrailingslashit( plugin_dir_path( LOGMATE_PLUGIN_FILE ) );
 	}
 }
 
@@ -214,4 +214,4 @@ final class DebugMaster {
 require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
 // Set global.
-$GLOBALS['debugmaster'] = debugm_get_instance();
+$GLOBALS['logmate'] = logmate_get_instance();

@@ -86,10 +86,10 @@ export const LogPurgeSettings: React.FC = () => {
 
 	return (
 		<>
-			<div className="debug-master-settings-section">
-				<div className="debug-master-setting-item">
-					<div className="debug-master-setting-row">
-						<div className="debug-master-setting-label-wrapper">
+			<div className="logmate-settings-section">
+				<div className="logmate-setting-item">
+					<div className="logmate-setting-row">
+						<div className="logmate-setting-label-wrapper">
 							<label>Purge Log Type</label>
 							<Tooltip 
 								content="Choose which log files to purge: All, PHP only, or JavaScript only."
@@ -97,7 +97,7 @@ export const LogPurgeSettings: React.FC = () => {
 							/>
 						</div>
 						<select 
-							className="debug-master-select"
+							className="logmate-select"
 							value={ logType } 
 							onChange={ ( e ) => setLogType( e.target.value as 'all' | 'php' | 'js' ) }
 						>
@@ -108,31 +108,31 @@ export const LogPurgeSettings: React.FC = () => {
 					</div>
 				</div>
 				
-				<div className="debug-master-setting-item">
-					<div className="debug-master-setting-row">
-						<div className="debug-master-setting-label-wrapper">
+				<div className="logmate-setting-item">
+					<div className="logmate-setting-row">
+						<div className="logmate-setting-label-wrapper">
 							<label>Keep only logs from last</label>
 							<Tooltip 
 								content="Delete log entries older than the specified time period to manage file size."
 								position="right"
 							/>
 						</div>
-						<div className="debug-master-toggle-wrapper debug-master-toggle-wrapper-column">
+						<div className="logmate-toggle-wrapper logmate-toggle-wrapper-column">
 							<Toggle
 								checked={ purgeType === 'keep' }
 								onChange={ () => setPurgeType( purgeType === 'keep' ? 'before' : 'keep' ) }
 							/>
 							{ purgeType === 'keep' && (
-								<div className="debug-master-purge-inputs">
+								<div className="logmate-purge-inputs">
 									<input
 										type="number"
-										className="debug-master-input"
+										className="logmate-input"
 										min="1"
 										value={ keepNumber }
 										onChange={ ( e ) => setKeepNumber( parseInt( e.target.value, 10 ) || 1 ) }
 									/>
 									<select 
-										className="debug-master-select"
+										className="logmate-select"
 										value={ keepPeriod } 
 										onChange={ ( e ) => setKeepPeriod( e.target.value as 'days' | 'weeks' | 'months' ) }
 									>
@@ -146,25 +146,25 @@ export const LogPurgeSettings: React.FC = () => {
 					</div>
 				</div>
 
-				<div className="debug-master-setting-item">
-					<div className="debug-master-setting-row">
-						<div className="debug-master-setting-label-wrapper">
+				<div className="logmate-setting-item">
+					<div className="logmate-setting-row">
+						<div className="logmate-setting-label-wrapper">
 							<label>Delete logs before date</label>
 							<Tooltip 
 								content="Permanently delete all log entries before the selected date and time."
 								position="right"
 							/>
 						</div>
-						<div className="debug-master-toggle-wrapper debug-master-toggle-wrapper-column">
+						<div className="logmate-toggle-wrapper logmate-toggle-wrapper-column">
 							<Toggle
 								checked={ purgeType === 'before' }
 								onChange={ () => setPurgeType( purgeType === 'before' ? 'keep' : 'before' ) }
 							/>
 							{ purgeType === 'before' && (
-								<div className="debug-master-purge-inputs">
+								<div className="logmate-purge-inputs">
 									<input
 										type="datetime-local"
-										className="debug-master-input debug-master-datetime-input"
+										className="logmate-input logmate-datetime-input"
 										value={ beforeDate }
 										onChange={ ( e ) => setBeforeDate( e.target.value ) }
 									/>
@@ -177,7 +177,7 @@ export const LogPurgeSettings: React.FC = () => {
 				<button
 					onClick={ handlePurgeClick }
 					disabled={ purgeMutation.isPending }
-					className="debug-master-btn debug-master-btn-danger"
+					className="logmate-btn logmate-btn-danger"
 				>
 					<Trash size={ 16 } />
 					{ purgeMutation.isPending ? 'Purging...' : 'Purge Logs' }
@@ -191,19 +191,19 @@ export const LogPurgeSettings: React.FC = () => {
 				title="Confirm Purge Logs"
 				confirmText="Purge Logs"
 				cancelText="Cancel"
-				confirmButtonClass="debug-master-btn-danger"
+				confirmButtonClass="logmate-btn-danger"
 				disabled={ purgeMutation.isPending }
 			>
-				<div className="debug-master-purge-confirm-content">
-					<div className="debug-master-purge-warning">
+				<div className="logmate-purge-confirm-content">
+					<div className="logmate-purge-warning">
 						<Warning size={ 24 } weight="fill" />
-						<p className="debug-master-purge-warning-text">
+						<p className="logmate-purge-warning-text">
 							Are you sure you want to purge logs? This action cannot be undone.
 						</p>
 					</div>
-					<div className="debug-master-purge-summary">
-						<p className="debug-master-purge-summary-label">Summary:</p>
-						<p className="debug-master-purge-summary-text">{ getPurgeSummary() }</p>
+					<div className="logmate-purge-summary">
+						<p className="logmate-purge-summary-label">Summary:</p>
+						<p className="logmate-purge-summary-text">{ getPurgeSummary() }</p>
 					</div>
 				</div>
 			</Modal>

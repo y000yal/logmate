@@ -12,7 +12,7 @@ export const MainLayout: React.FC = () => {
 	useEffect( () => {
 		const handleClickOutside = ( event: MouseEvent ) => {
 			const target = event.target as Node;
-			const menuContainer = document.querySelector( '.debug-master-menu-container' );
+			const menuContainer = document.querySelector( '.logmate-menu-container' );
 			
 			if ( 
 				menuRef.current && 
@@ -49,10 +49,10 @@ export const MainLayout: React.FC = () => {
 	};
 
 	return (
-		<div className="debug-master-app">
-			<div className="debug-master-menu-container">
+		<div className="logmate-app">
+			<div className="logmate-menu-container">
 				<button
-					className="debug-master-floating-menu-toggle"
+					className="logmate-floating-menu-toggle"
 					onClick={ handleToggleClick }
 					aria-label="Toggle menu"
 					type="button"
@@ -60,24 +60,24 @@ export const MainLayout: React.FC = () => {
 					{ isMenuOpen ? <X size={ 22 } /> : <List size={ 22 } /> }
 				</button>
 				{ isMenuOpen && (
-					<div className="debug-master-dropdown-menu" ref={ menuRef }>
+					<div className="logmate-dropdown-menu" ref={ menuRef }>
 						<button
 							onClick={ () => handleNavClick( '/logs' ) }
-							className={ `debug-master-dropdown-item ${ location.pathname === '/logs' ? 'active' : '' }` }
+							className={ `logmate-dropdown-item ${ location.pathname === '/logs' ? 'active' : '' }` }
 						>
 							<Bug size={ 18 } />
 							<span>Logs</span>
 						</button>
 						<button
 							onClick={ () => handleNavClick( '/settings' ) }
-							className={ `debug-master-dropdown-item ${ location.pathname === '/settings' ? 'active' : '' }` }
+							className={ `logmate-dropdown-item ${ location.pathname === '/settings' ? 'active' : '' }` }
 						>
 							<Gear size={ 18 } />
 							<span>Settings</span>
 						</button>
 						<button
 							onClick={ () => handleNavClick( '/system-info' ) }
-							className={ `debug-master-dropdown-item ${ location.pathname === '/system-info' ? 'active' : '' }` }
+							className={ `logmate-dropdown-item ${ location.pathname === '/system-info' ? 'active' : '' }` }
 						>
 							<Info size={ 18 } />
 							<span>System Info</span>
@@ -85,7 +85,7 @@ export const MainLayout: React.FC = () => {
 					</div>
 				) }
 			</div>
-			<div className="debug-master-content">
+			<div className="logmate-content">
 				<Outlet />
 			</div>
 		</div>

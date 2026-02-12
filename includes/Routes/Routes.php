@@ -1,17 +1,17 @@
 <?php
 /**
- * Main Routes class for Debug Master plugin.
+ * Main Routes class for LogMate plugin.
  *
  * @since 1.0.0
- * @package DebugMaster\Routes
+ * @package LogMate\Routes
  */
 
-namespace DebugMaster\Routes;
+namespace LogMate\Routes;
 
 /**
  * Main Routes class for managing all REST API endpoints.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class Routes {
 
@@ -51,15 +51,15 @@ class Routes {
 	 */
 	protected function get_rest_classes(): array {
 		return apply_filters(
-			'debugm_api_get_rest_namespaces',
+			'logmate_api_get_rest_namespaces',
 			array(
-				'debug-master/v1' => $this->get_routes_classes(),
+				'logmate/v1' => $this->get_routes_classes(),
 			)
 		);
 	}
 
 	/**
-	 * All controller classes under debug-master/v1.
+	 * All controller classes under logmate/v1.
 	 *
 	 * @return array
 	 * @since 1.0.0

@@ -28,6 +28,14 @@ export const SettingsPanel: React.FC = () => {
 		},
 		onSuccess: ( data ) => {
 			toast.success( data.message );
+			// Optimistically update cache so UI never reads undefined during refetch.
+			const cached = queryClient.getQueryData< { data: Settings } >( [ 'settings' ] );
+			if ( cached?.data ) {
+				const newStatus = cached.data.log_status === 'enabled' ? 'disabled' : 'enabled';
+				queryClient.setQueryData< { data: Settings } >( [ 'settings' ], {
+					data: { ...cached.data, log_status: newStatus },
+				} );
+			}
 			queryClient.invalidateQueries( { queryKey: [ 'settings' ] } );
 		},
 		onError: () => {
@@ -44,11 +52,11 @@ export const SettingsPanel: React.FC = () => {
 			toast.success( data.message );
 			setUpdatingSetting( null );
 			// Optimistically update the settings in the cache immediately for instant UI updates.
-			const currentSettings = queryClient.getQueryData< { data: Settings } >( [ 'settings' ] );
-			if ( currentSettings ) {
+			const cached = queryClient.getQueryData< { data: Settings } >( [ 'settings' ] );
+			if ( cached?.data ) {
 				queryClient.setQueryData< { data: Settings } >( [ 'settings' ], {
 					data: {
-						...currentSettings.data,
+						...cached.data,
 						...variables,
 					},
 				} );
@@ -73,9 +81,10 @@ export const SettingsPanel: React.FC = () => {
 		} );
 	};
 
-	if ( isLoading || ! settings ) {
+	// Guard against undefined settings or settings.data (e.g. after invalidateQueries during refetch).
+	if ( isLoading || ! settings?.data ) {
 		return (
-			<div className="debug-master-screen">
+			<div className="logmate-screen">
 				<Spinner />
 			</div>
 		);
@@ -85,10 +94,10 @@ export const SettingsPanel: React.FC = () => {
 	const isLoggingEnabled = currentSettings.log_status === 'enabled';
 
 	return (
-		<div className="debug-master-screen">
-			<div className="debug-master-settings">
-				<div className="debug-master-settings-section">
-					<div className="debug-master-setting-header">
+		<div className="logmate-screen">
+			<div className="logmate-settings">
+				<div className="logmate-settings-section">
+					<div className="logmate-setting-header">
 						<StatusIndicator
 							status={ currentSettings.log_status }
 							onToggle={ () => toggleLoggingMutation.mutate() }
@@ -99,70 +108,70 @@ export const SettingsPanel: React.FC = () => {
 
 				{ isLoggingEnabled && (
 					<>
-						<div className="debug-master-settings-section">
-							<div className="debug-master-setting-item">
-							<div className="debug-master-setting-row">
-								<div className="debug-master-setting-label-wrapper">
+						<div className="logmate-settings-section">
+							<div className="logmate-setting-item">
+							<div className="logmate-setting-row">
+								<div className="logmate-setting-label-wrapper">
 									<label>Auto-refresh logs</label>
 									<Tooltip 
 										content="Automatically refresh logs every 10 seconds to show new entries in real-time."
 										position="right"
 									/>
 								</div>
-								<div className="debug-master-toggle-wrapper">
+								<div className="logmate-toggle-wrapper">
 									<Toggle
 										checked={ currentSettings.autorefresh === 'enabled' }
 										onChange={ () => handleSettingUpdate( 'autorefresh', currentSettings.autorefresh ) }
 										disabled={ updatingSetting === 'autorefresh' || toggleLoggingMutation.isPending }
 									/>
 									{ updatingSetting === 'autorefresh' && (
-										<div className="debug-master-toggle-loader">
+										<div className="logmate-toggle-loader">
 											<Spinner />
 										</div>
 									) }
 								</div>
 							</div>
 						</div>
-						<div className="debug-master-setting-item">
-							<div className="debug-master-setting-row">
-								<div className="debug-master-setting-label-wrapper">
+						<div className="logmate-setting-item">
+							<div className="logmate-setting-row">
+								<div className="logmate-setting-label-wrapper">
 									<label>Log JavaScript errors</label>
 									<Tooltip 
 										content="Capture and log JavaScript errors from the frontend to a separate log file."
 										position="right"
 									/>
 								</div>
-								<div className="debug-master-toggle-wrapper">
+								<div className="logmate-toggle-wrapper">
 									<Toggle
 										checked={ currentSettings.js_error_logging === 'enabled' }
 										onChange={ () => handleSettingUpdate( 'js_error_logging', currentSettings.js_error_logging ) }
 										disabled={ updatingSetting === 'js_error_logging' || toggleLoggingMutation.isPending }
 									/>
 									{ updatingSetting === 'js_error_logging' && (
-										<div className="debug-master-toggle-loader">
+										<div className="logmate-toggle-loader">
 											<Spinner />
 										</div>
 									) }
 								</div>
 							</div>
 						</div>
-						<div className="debug-master-setting-item">
-							<div className="debug-master-setting-row">
-								<div className="debug-master-setting-label-wrapper">
+						<div className="logmate-setting-item">
+							<div className="logmate-setting-row">
+								<div className="logmate-setting-label-wrapper">
 									<label>Modify SCRIPT_DEBUG</label>
 									<Tooltip 
 										content="Controls SCRIPT_DEBUG in wp-config.php. Enables non-minified JS/CSS for easier debugging."
 										position="right"
 									/>
 								</div>
-								<div className="debug-master-toggle-wrapper">
+								<div className="logmate-toggle-wrapper">
 									<Toggle
 										checked={ currentSettings.modify_script_debug === 'enabled' }
 										onChange={ () => handleSettingUpdate( 'modify_script_debug', currentSettings.modify_script_debug ) }
 										disabled={ updatingSetting === 'modify_script_debug' || toggleLoggingMutation.isPending }
 									/>
 									{ updatingSetting === 'modify_script_debug' && (
-										<div className="debug-master-toggle-loader">
+										<div className="logmate-toggle-loader">
 											<Spinner />
 										</div>
 									) }

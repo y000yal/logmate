@@ -1,7 +1,7 @@
 /**
- * Babel configuration for Debug Master plugin.
+ * Babel configuration for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 module.exports = function ( api ) {

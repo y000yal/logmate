@@ -1,20 +1,20 @@
 <?php
 /**
- * System Info Controller for Debug Master plugin.
+ * System Info Controller for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Controllers;
+namespace LogMate\Controllers;
 
-use DebugMaster\Controllers\Controller as BaseController;
+use LogMate\Controllers\Controller as BaseController;
 use WP_Rest_Request;
 use WP_REST_Response;
 
 /**
  * System Info Controller for managing system information.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class SystemInfoController extends BaseController {
 

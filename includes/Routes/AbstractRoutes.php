@@ -3,12 +3,12 @@
  * Abstract Routes.
  *
  * @since 1.0.0
- * @package DebugMaster\Routes
+ * @package LogMate\Routes
  */
 
-namespace DebugMaster\Routes;
+namespace LogMate\Routes;
 
-use DebugMaster\Middlewares\PermissionMiddleware;
+use LogMate\Middlewares\PermissionMiddleware;
 
 /**
  * Abstract class for defining routes.
@@ -24,7 +24,7 @@ abstract class AbstractRoutes {
 	 *
 	 * @var string
 	 */
-	protected string $namespace = 'debug-master';
+	protected string $namespace = 'logmate';
 
 	/**
 	 * The version of the API.

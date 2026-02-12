@@ -1,19 +1,19 @@
 <?php
 /**
- * Helper functions for Debug Master plugin.
+ * Helper functions for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Get main instance of DebugMaster.
+ * Get main instance of LogMate.
  *
- * @return DebugMaster
+ * @return LogMate
  */
-function debugm_get_instance(): DebugMaster {
-	return DebugMaster::instance();
+function logmate_get_instance(): LogMate {
+	return LogMate::instance();
 }
 
 /**
@@ -21,7 +21,7 @@ function debugm_get_instance(): DebugMaster {
  *
  * @return WP_Filesystem_Base|false Filesystem object or false on failure.
  */
-function debugm_get_filesystem() {
+function logmate_get_filesystem() {
 	global $wp_filesystem;
 
 	if ( ! function_exists( 'WP_Filesystem' ) ) {

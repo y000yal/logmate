@@ -1,7 +1,7 @@
 /**
- * Gruntfile for Debug Master Plugin.
+ * Gruntfile for LogMate Plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 const fs = require( "fs" );
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
 			compress: {
 				main: {
 					options: {
-						archive: "release/debug-monitor.zip",
+						archive: "release/logmate.zip",
 					},
 					files: [
 						{
@@ -128,7 +128,7 @@ module.exports = function (grunt) {
 								"!deploy.sh",
 								"!test-deploy.sh"
 							],
-							dest: "debug-monitor/"
+							dest: "logmate/"
 					},
 					],
 				},
@@ -144,7 +144,7 @@ module.exports = function (grunt) {
 					command: "cross-env NODE_ENV=production webpack"
 				},
 				makepot: {
-					command: "composer exec wp -- i18n make-pot . languages/debug-monitor.pot --domain=debug-monitor"
+					command: "composer exec wp -- i18n make-pot . languages/logmate.pot --domain=logmate"
 				},
 				phpcs: {
 					command: "npm run phpcs"

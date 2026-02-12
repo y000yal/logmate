@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="WordPress Plugin Standards">
-    <description>WordPress Coding Standards for Debug Master Plugin</description>
+    <description>WordPress Coding Standards for LogMate Plugin</description>
     
     <!-- Include WordPress Coding Standards but exclude file naming rules -->
     <rule ref="WordPress">

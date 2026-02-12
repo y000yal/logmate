@@ -104,76 +104,76 @@ export const ExportLogsModal: React.FC<ExportLogsModalProps> = ({
 	}
 
 	return (
-		<div className="debug-master-modal-overlay" onClick={onClose}>
-			<div className="debug-master-modal" onClick={(e) => e.stopPropagation()}>
-				<div className="debug-master-modal-header">
+		<div className="logmate-modal-overlay" onClick={onClose}>
+			<div className="logmate-modal" onClick={(e) => e.stopPropagation()}>
+				<div className="logmate-modal-header">
 					<h2>Export Logs</h2>
-					<button className="debug-master-modal-close" onClick={onClose}>
+					<button className="logmate-modal-close" onClick={onClose}>
 						<X size={20} />
 					</button>
 				</div>
-				<div className="debug-master-modal-body">
-					<div className="debug-master-export-options">
-						<div className="debug-master-radio-group">
-							<label className="debug-master-radio-label">
+				<div className="logmate-modal-body">
+					<div className="logmate-export-options">
+						<div className="logmate-radio-group">
+							<label className="logmate-radio-label">
 								<input
 									type="radio"
 									name="exportType"
 									value="date-range"
 									checked={exportType === 'date-range'}
 									onChange={(e) => setExportType(e.target.value as 'date-range')}
-									className="debug-master-radio"
+									className="logmate-radio"
 								/>
 								<span>Export by Date Range</span>
 							</label>
 							{exportType === 'date-range' && (
-								<div className="debug-master-date-range-inputs">
-									<div className="debug-master-date-input-group">
+								<div className="logmate-date-range-inputs">
+									<div className="logmate-date-input-group">
 										<label>Start Date</label>
 										<input
 											type="date"
 											value={startDate}
 											onChange={(e) => setStartDate(e.target.value)}
-											className="debug-master-input debug-master-datetime-input"
+											className="logmate-input logmate-datetime-input"
 										/>
 									</div>
-									<div className="debug-master-date-input-group">
+									<div className="logmate-date-input-group">
 										<label>End Date</label>
 										<input
 											type="date"
 											value={endDate}
 											onChange={(e) => setEndDate(e.target.value)}
-											className="debug-master-input debug-master-datetime-input"
+											className="logmate-input logmate-datetime-input"
 										/>
 									</div>
 								</div>
 							)}
 						</div>
-						<div className="debug-master-radio-group">
-							<label className="debug-master-radio-label">
+						<div className="logmate-radio-group">
+							<label className="logmate-radio-label">
 								<input
 									type="radio"
 									name="exportType"
 									value="entire-file"
 									checked={exportType === 'entire-file'}
 									onChange={(e) => setExportType(e.target.value as 'entire-file')}
-									className="debug-master-radio"
+									className="logmate-radio"
 								/>
 								<span>Export Entire File</span>
 							</label>
 						</div>
 					</div>
 				</div>
-				<div className="debug-master-modal-footer">
+				<div className="logmate-modal-footer">
 					<button
-						className="debug-master-btn debug-master-btn-secondary"
+						className="logmate-btn logmate-btn-secondary"
 						onClick={onClose}
 						disabled={isExporting}
 					>
 						Cancel
 					</button>
 					<button
-						className="debug-master-btn debug-master-btn-primary"
+						className="logmate-btn logmate-btn-primary"
 						onClick={handleExport}
 						disabled={isExporting}
 					>

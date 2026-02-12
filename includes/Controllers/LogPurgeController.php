@@ -1,21 +1,21 @@
 <?php
 /**
- * Log Purge Controller for Debug Master plugin.
+ * Log Purge Controller for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Controllers;
+namespace LogMate\Controllers;
 
-use DebugMaster\Controllers\Controller as BaseController;
-use DebugMaster\Services\LogPurgeService;
+use LogMate\Controllers\Controller as BaseController;
+use LogMate\Services\LogPurgeService;
 use WP_Rest_Request;
 use WP_REST_Response;
 
 /**
  * Log Purge Controller for managing log purging operations.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class LogPurgeController extends BaseController {
 
@@ -48,7 +48,7 @@ class LogPurgeController extends BaseController {
 			return $this->response(
 				array(
 					'success' => false,
-					'message' => __( 'Date parameter is required.', 'debug-monitor' ),
+					'message' => __( 'Date parameter is required.', 'logmate' ),
 				),
 				400
 			);
@@ -64,7 +64,7 @@ class LogPurgeController extends BaseController {
 				$result = $this->purge_service->purge_before_date( $php_log_file_path, $before_date );
 				if ( $result['success'] ) {
 					$results[] = $result;
-					$messages[] = __( 'PHP logs purged successfully.', 'debug-monitor' );
+					$messages[] = __( 'PHP logs purged successfully.', 'logmate' );
 				}
 			}
 		}
@@ -76,7 +76,7 @@ class LogPurgeController extends BaseController {
 				$result = $this->purge_service->purge_before_date( $js_log_file_path, $before_date );
 				if ( $result['success'] ) {
 					$results[] = $result;
-					$messages[] = __( 'JavaScript logs purged successfully.', 'debug-monitor' );
+					$messages[] = __( 'JavaScript logs purged successfully.', 'logmate' );
 				}
 			}
 		}
@@ -94,7 +94,7 @@ class LogPurgeController extends BaseController {
 		return $this->response(
 			array(
 				'success' => false,
-				'message' => __( 'Failed to purge logs.', 'debug-monitor' ),
+				'message' => __( 'Failed to purge logs.', 'logmate' ),
 			),
 			500
 		);
@@ -122,7 +122,7 @@ class LogPurgeController extends BaseController {
 				$result = $this->purge_service->keep_last_period( $php_log_file_path, $number, $period );
 				if ( $result['success'] ) {
 					$results[] = $result;
-					$messages[] = __( 'PHP logs purged successfully.', 'debug-monitor' );
+					$messages[] = __( 'PHP logs purged successfully.', 'logmate' );
 				}
 			}
 		}
@@ -134,7 +134,7 @@ class LogPurgeController extends BaseController {
 				$result = $this->purge_service->keep_last_period( $js_log_file_path, $number, $period );
 				if ( $result['success'] ) {
 					$results[] = $result;
-					$messages[] = __( 'JavaScript logs purged successfully.', 'debug-monitor' );
+					$messages[] = __( 'JavaScript logs purged successfully.', 'logmate' );
 				}
 			}
 		}
@@ -152,7 +152,7 @@ class LogPurgeController extends BaseController {
 		return $this->response(
 			array(
 				'success' => false,
-				'message' => __( 'Failed to purge logs.', 'debug-monitor' ),
+				'message' => __( 'Failed to purge logs.', 'logmate' ),
 			),
 			500
 		);

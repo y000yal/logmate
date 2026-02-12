@@ -1,7 +1,7 @@
 /**
- * PostCSS configuration for Debug Master plugin.
+ * PostCSS configuration for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 module.exports = {

@@ -1,13 +1,13 @@
 <?php
 /**
- * Log Purge Routes for Debug Master plugin.
+ * Log Purge Routes for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Routes;
+namespace LogMate\Routes;
 
-use DebugMaster\Controllers\LogPurgeController;
+use LogMate\Controllers\LogPurgeController;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -15,7 +15,7 @@ use WP_REST_Response;
 /**
  * Log Purge Routes class for managing log purge REST endpoints.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class LogPurgeRoutes extends AbstractRoutes {
 

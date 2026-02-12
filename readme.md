@@ -16,7 +16,7 @@
 x
 ## Installation
 
-1. Upload the plugin files to the `/wp-content/plugins/debug-master` directory, or install it via the WordPress plugin screen.
+1. Upload the plugin files to the `/wp-content/plugins/logmate` directory, or install it via the WordPress plugin screen.
 2. Activate through the 'Plugins' menu.
 3. Configure via **LogMate** menu in WordPress admin.
 
@@ -45,7 +45,7 @@ To enable hot reload during development:
 1. Run `npm run hot` in the plugin directory
 2. Add this to your `wp-config.php`:
    ```php
-   define( 'DEBUGM_HOT_RELOAD', true );
+   define( 'LOGMATE_HOT_RELOAD', true );
    ```
 
 ## Requirements

@@ -1,18 +1,18 @@
 <?php
 /**
- * Settings management for Debug Master plugin.
+ * Settings management for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster;
+namespace LogMate;
 
-use DebugMaster\Routes\Routes;
+use LogMate\Routes\Routes;
 
 /**
- * Settings class for managing Debug Master plugin settings.
+ * Settings class for managing LogMate plugin settings.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class Settings {
 
@@ -24,8 +24,8 @@ class Settings {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_assets' ) );
 		add_action( 'admin_init', array( $this, 'redirect_after_activation' ) );
-		register_deactivation_hook( DEBUGM_PLUGIN_FILE, array( $this, 'on_deactivation' ) );
-		register_activation_hook( DEBUGM_PLUGIN_FILE, array( $this, 'on_activation' ) );
+		register_deactivation_hook( LOGMATE_PLUGIN_FILE, array( $this, 'on_deactivation' ) );
+		register_activation_hook( LOGMATE_PLUGIN_FILE, array( $this, 'on_activation' ) );
 	}
 
 	/**
@@ -47,14 +47,14 @@ class Settings {
 	}
 
 	/**
-	 * Register the admin menu for Debug Master.
+	 * Register the admin menu for LogMate.
 	 */
 	public function register_menu(): void {
 		add_menu_page(
-			__( 'LogMate', 'debug-monitor' ),
-			__( 'LogMate', 'debug-monitor' ),
+			__( 'LogMate', 'logmate' ),
+			__( 'LogMate', 'logmate' ),
 			'manage_options',
-			'debug-master',
+			'logmate',
 			array( $this, 'render_page' ),
 			$this->get_icon_svg(),
 			60
@@ -74,7 +74,7 @@ class Settings {
 				update_option( 'debugm_js_log_file_path', $js_log_file_path, false );
 
 				// Create the file if it doesn't exist.
-				$filesystem = debugm_get_filesystem();
+				$filesystem = logmate_get_filesystem();
 				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_file
 				if ( ! is_file( $js_log_file_path ) ) {
 					if ( $filesystem ) {
@@ -87,30 +87,30 @@ class Settings {
 			}
 		}
 
-		echo '<div id="debug-master-admin-app"></div>';
+		echo '<div id="logmate-admin-app"></div>';
 	}
 
 	/**
-	 * Enqueue admin assets for Debug Master.
+	 * Enqueue admin assets for LogMate.
 	 *
 	 * @param string $hook The current admin page hook.
 	 */
 	public function enqueue_assets( $hook ): void {
 
-		if ( 'toplevel_page_debug-master' !== $hook ) {
+		if ( 'toplevel_page_logmate' !== $hook ) {
 			return;
 		}
 
 		// Check if webpack dev server is running (hot reload mode).
-		// Set DEBUGM_HOT_RELOAD constant to true in wp-config.php when running 'npm run hot'.
-		$is_hot = defined( 'DEBUGM_HOT_RELOAD' ) && DEBUGM_HOT_RELOAD && defined( 'WP_DEBUG' ) && WP_DEBUG;
+		// Set LOGMATE_HOT_RELOAD constant to true in wp-config.php when running 'npm run hot'.
+		$is_hot = defined( 'LOGMATE_HOT_RELOAD' ) && LOGMATE_HOT_RELOAD && defined( 'WP_DEBUG' ) && WP_DEBUG;
 
 		if ( $is_hot ) {
 			// Load from webpack dev server for hot reload.
 			$dev_server_url = 'http://localhost:5433';
 
 			wp_enqueue_script(
-				'debug-master-admin',
+				'logmate-admin',
 				$dev_server_url . '/admin.js',
 				array( 'wp-element', 'wp-api-fetch' ),
 				time(), // Use timestamp for cache busting in dev mode.
@@ -120,33 +120,40 @@ class Settings {
 		} else {
 			// Load from built assets - production mode.
 			wp_enqueue_script(
-				'debug-master-admin',
-				debugm_get_instance()->plugin_url() . '/assets/build/admin.js',
+				'logmate-admin',
+				logmate_get_instance()->plugin_url() . '/assets/build/admin.js',
 				array( 'wp-element', 'wp-api-fetch' ),
-				DEBUGM_VERSION,
+				LOGMATE_VERSION,
 				true
 			);
 
 			wp_enqueue_style(
-				'debug-master-admin',
-				debugm_get_instance()->plugin_url() . '/assets/css/admin.css',
+				'logmate-admin',
+				logmate_get_instance()->plugin_url() . '/assets/css/admin.css',
 				array(),
-				DEBUGM_VERSION
+				LOGMATE_VERSION
 			);
 		}
 
 		$log_file_path = get_option( 'debugm_log_file_path', '' );
 		$log_status    = get_option( 'debugm_log_status', 'disabled' );
 
+		$logmate_data = array(
+			'restUrl'     => esc_url_raw( rest_url( 'logmate/v1/' ) ),
+			'nonce'       => wp_create_nonce( 'wp_rest' ),
+			'logFilePath' => esc_html( $log_file_path ),
+			'logStatus'   => esc_html( $log_status ),
+		);
 		wp_localize_script(
-			'debug-master-admin',
+			'logmate-admin',
+			'LogMateData',
+			$logmate_data
+		);
+		// Backward compatibility: old cached admin.js may still reference DebugMasterData.
+		wp_localize_script(
+			'logmate-admin',
 			'DebugMasterData',
-			array(
-				'restUrl'     => esc_url_raw( rest_url( 'debug-master/v1/' ) ),
-				'nonce'       => wp_create_nonce( 'wp_rest' ),
-				'logFilePath' => esc_html( $log_file_path ),
-				'logStatus'   => esc_html( $log_status ),
-			)
+			$logmate_data
 		);
 	}
 
@@ -175,7 +182,7 @@ class Settings {
 				update_option( 'debugm_js_log_file_path', $js_log_file_path, false );
 
 				// Create the file if it doesn't exist.
-				$filesystem = debugm_get_filesystem();
+				$filesystem = logmate_get_filesystem();
 				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_file
 				if ( ! is_file( $js_log_file_path ) ) {
 					if ( $filesystem ) {
@@ -189,20 +196,20 @@ class Settings {
 		}
 
 		wp_enqueue_script(
-			'debug-master-public',
-			debugm_get_instance()->plugin_url() . '/assets/js/public.js',
+			'logmate-public',
+			logmate_get_instance()->plugin_url() . '/assets/js/public.js',
 			array(),
-			DEBUGM_VERSION . '.' . time(), // Add timestamp for cache busting during testing.
+			LOGMATE_VERSION . '.' . time(), // Add timestamp for cache busting during testing.
 			true
 		);
 
-		$rest_url = esc_url_raw( rest_url( 'debug-master/v1/' ) );
-		$js_error_url = esc_url_raw( rest_url( 'debug-master/v1/logs/js-error' ) );
+		$rest_url = esc_url_raw( rest_url( 'logmate/v1/' ) );
+		$js_error_url = esc_url_raw( rest_url( 'logmate/v1/logs/js-error' ) );
 		$nonce = wp_create_nonce( 'wp_rest' );
 
 		wp_localize_script(
-			'debug-master-public',
-			'DebugMasterData',
+			'logmate-public',
+			'LogMateData',
 			array(
 				'restUrl'         => $rest_url,
 				'nonce'           => $nonce,
@@ -234,12 +241,12 @@ class Settings {
 		}
 
 		// Don't redirect if already on the plugin page.
-		if ( isset( $_GET['page'] ) && 'debug-master' === $_GET['page'] ) {
+		if ( isset( $_GET['page'] ) && 'logmate' === $_GET['page'] ) {
 			return;
 		}
 
 		// Redirect to plugin admin page.
-		wp_safe_redirect( admin_url( 'admin.php?page=debug-master' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=logmate' ) );
 		exit;
 	}
 
@@ -249,7 +256,7 @@ class Settings {
 	 * @return void
 	 */
 	public static function on_activation(): void {
-		$wp_config_service = new \DebugMaster\Services\WpConfigService();
+		$wp_config_service = new \LogMate\Services\WpConfigService();
 
 		// Store original wp-config.php state before modifications.
 		$wp_config_service->store_original_state();
@@ -270,7 +277,7 @@ class Settings {
 	 * @return void
 	 */
 	public static function on_deactivation(): void {
-		$wp_config_service = new \DebugMaster\Services\WpConfigService();
+		$wp_config_service = new \LogMate\Services\WpConfigService();
 
 		// Restore original wp-config.php state so normal debug logging works.
 		$wp_config_service->restore_original_state();
@@ -282,8 +289,8 @@ class Settings {
 	 * @return void
 	 */
 	private static function create_log_file(): void {
-		$uploads_path = DEBUGM_UPLOAD_PATH;
-		$filesystem = debugm_get_filesystem();
+		$uploads_path = LOGMATE_UPLOAD_PATH;
+		$filesystem = logmate_get_filesystem();
 
 		if ( ! is_dir( $uploads_path ) ) {
 			wp_mkdir_p( $uploads_path );

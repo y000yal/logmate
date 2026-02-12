@@ -16,11 +16,11 @@ export const Tooltip: React.FC<TooltipProps> = ({
 	const tooltipId = useId();
 
 	return (
-		<div className="debug-master-tooltip-wrapper">
+		<div className="logmate-tooltip-wrapper">
 			{children ? (
 				<div
 					data-tooltip-id={tooltipId}
-					className="debug-master-tooltip-trigger"
+					className="logmate-tooltip-trigger"
 				>
 					{children}
 				</div>
@@ -28,7 +28,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
 				<button
 					type="button"
 					data-tooltip-id={tooltipId}
-					className="debug-master-tooltip-icon"
+					className="logmate-tooltip-icon"
 					aria-label="Information"
 				>
 					<Info size={16} />
@@ -38,7 +38,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
 				id={tooltipId}
 				place={position}
 				content={content}
-				className="debug-master-react-tooltip"
+				className="logmate-react-tooltip"
 			/>
 		</div>
 	);

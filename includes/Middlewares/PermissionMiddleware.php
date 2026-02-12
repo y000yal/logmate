@@ -3,10 +3,10 @@
  * Permission Middleware for REST API routes.
  *
  * @since 1.0.0
- * @package DebugMaster\Middlewares
+ * @package LogMate\Middlewares
  */
 
-namespace DebugMaster\Middlewares;
+namespace LogMate\Middlewares;
 
 use WP_Error;
 use WP_REST_Request;
@@ -14,7 +14,7 @@ use WP_REST_Request;
 /**
  * Permission Middleware class.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class PermissionMiddleware {
 
@@ -31,7 +31,7 @@ class PermissionMiddleware {
 		) {
 			return new WP_Error(
 				'rest_forbidden',
-				__( 'You are not allowed to perform this action.', 'debug-monitor' ),
+				__( 'You are not allowed to perform this action.', 'logmate' ),
 				array( 'status' => 403 )
 			);
 		}

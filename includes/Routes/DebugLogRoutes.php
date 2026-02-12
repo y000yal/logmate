@@ -1,13 +1,13 @@
 <?php
 /**
- * Debug Log Routes for Debug Master plugin.
+ * Debug Log Routes for LogMate plugin.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
-namespace DebugMaster\Routes;
+namespace LogMate\Routes;
 
-use DebugMaster\Controllers\DebugLogController;
+use LogMate\Controllers\DebugLogController;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -15,7 +15,7 @@ use WP_REST_Response;
 /**
  * Debug Log Routes class for managing log REST endpoints.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 class DebugLogRoutes extends AbstractRoutes {
 
@@ -64,14 +64,14 @@ class DebugLogRoutes extends AbstractRoutes {
 			)
 		);
 
-		// JavaScript error logging endpoint (no authentication required for frontend).
+		// JavaScript error logging endpoint (requires manage_options so only admins can write to log).
 		register_rest_route(
 			$this->namespace . '/' . $this->version,
 			$this->rest_base . '/js-error',
 			array(
 				array(
 					'methods'             => 'POST',
-					'permission_callback' => '__return_true', // Allow public access.
+					'permission_callback' => array( $this->middleware, 'authorize' ),
 					'callback'            => array( new DebugLogController(), 'log_js_error' ),
 				),
 			)

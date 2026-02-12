@@ -13,9 +13,9 @@ export const StatusIndicator: React.FC< StatusIndicatorProps > = ( { status, onT
 	const isEnabled = status === 'enabled';
 
 	return (
-		<div className="debug-master-setting-row">
+		<div className="logmate-setting-row">
 			<div className="status-info">
-				<div className="debug-master-setting-label-wrapper">
+				<div className="logmate-setting-label-wrapper">
 					<span className={ `status-badge ${ isEnabled ? 'enabled' : 'disabled' }` }>
 						{ isEnabled ? 'Enabled' : 'Disabled' }
 					</span>
@@ -25,10 +25,10 @@ export const StatusIndicator: React.FC< StatusIndicatorProps > = ( { status, onT
 					/>
 				</div>
 			</div>
-			<div className="debug-master-toggle-wrapper">
+			<div className="logmate-toggle-wrapper">
 				<Toggle checked={ isEnabled } onChange={ onToggle } disabled={ loading } />
 				{ loading && (
-					<div className="debug-master-toggle-loader">
+					<div className="logmate-toggle-loader">
 						<Spinner />
 					</div>
 				) }

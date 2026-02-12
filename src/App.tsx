@@ -35,7 +35,7 @@ export const App: React.FC = () => {
 					draggable
 					pauseOnHover
 				/>
-				<ReactTooltip id="debug-master-tooltip" />
+				<ReactTooltip id="logmate-tooltip" />
 			</HashRouter>
 			<ReactQueryDevtools initialIsOpen={ false } />
 		</QueryClientProvider>

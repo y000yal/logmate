@@ -2,7 +2,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package DebugMaster
+ * @package LogMate
  */
 
 // If uninstall not called from WordPress, then exit.

@@ -1,4 +1,4 @@
-Debug Master Plugin License
+LogMate Plugin License
 
 Copyright (c) 2024 Y0000el
 
