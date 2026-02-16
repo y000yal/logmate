@@ -40,12 +40,15 @@ jobs:
         run: |
           npx grunt release
           echo "zip_path=release/logmate.zip" >> $GITHUB_OUTPUT
-      - name: Fix Git safe.directory for 10up deploy
-        run: git config --global --add safe.directory /github/workspace
+      - name: Prepare deploy directory (avoids git in 10up Docker)
+        run: |
+          mkdir -p release/deploy
+          unzip -q release/logmate.zip -d release/deploy
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@master
         env:
           SLUG: logmate
+          BUILD_DIR: release/deploy/logmate
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
       - name: Upload release asset
