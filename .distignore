@@ -1,0 +1,45 @@
+# Hidden files
+.babelrc
+.distignore
+.gitignore
+.eslintrc.js
+.prettierrc
+
+# Build / release
+node_modules/
+dist/
+release/
+*.zip
+
+# Development
+src/
+scripts/
+tests/
+webpack.config.js
+*.config.js
+*.config.ts
+package.json
+package-lock.json
+tsconfig.json
+tailwind.config.js
+postcss.config.js
+babel.config.js
+Gruntfile.js
+composer.lock
+phpcs.xml
+changelog.txt
+README.md
+CHANGELOG.md
+deploy.sh
+test-deploy.sh
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# GitHub (deploy uses repo; assets in .wordpress-org)
+.github/
