@@ -40,6 +40,8 @@ jobs:
         run: |
           npx grunt release
           echo "zip_path=release/logmate.zip" >> $GITHUB_OUTPUT
+      - name: Fix Git safe.directory for 10up deploy
+        run: git config --global --add safe.directory /github/workspace
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@master
         env:
