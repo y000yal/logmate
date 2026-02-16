@@ -39,10 +39,11 @@ jobs:
         id: build
         run: |
           npx grunt release
-          echo "zip_path=release/brutefort.zip" >> $GITHUB_OUTPUT
+          echo "zip_path=release/logmate.zip" >> $GITHUB_OUTPUT
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@master
         env:
+          SLUG: logmate
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
       - name: Upload release asset
